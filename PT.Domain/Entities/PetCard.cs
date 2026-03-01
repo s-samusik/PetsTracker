@@ -1,12 +1,11 @@
 ﻿using PT.Domain.Enums;
 
-namespace PT.Domain.Models;
+namespace PT.Domain.Entities;
 
-public class PetCard
+public sealed class PetCard : BaseEntity
 {
-    public Guid Id { get; set; }
     public string? PetName { get; set; }
     public CardState State { get; set; }
     public string? PhotoUrl { get; set; }
-    public List<SocialLink> SocialLinks { get; set; } = new();
+    public List<SocialLink> SocialLinks { get; set; } = [];
 }
