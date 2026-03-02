@@ -9,16 +9,16 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
     public void Configure(EntityTypeBuilder<User> builder)
     {
         builder.ToTable("users");
-
+        
         builder.HasKey(x => x.Id);
-
+        
         builder.Property(x => x.PhoneNumber)
-               .HasMaxLength(32);
-
+            .HasMaxLength(64);
+        
         builder.HasMany(x => x.PetCards)
-               .WithOne()
-               .HasForeignKey("UserId")
-               .OnDelete(DeleteBehavior.Cascade);
+            .WithOne(x => x.User)
+            .HasForeignKey(x => x.UserId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }
 

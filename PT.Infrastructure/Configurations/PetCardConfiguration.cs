@@ -12,18 +12,22 @@ public class PetCardConfiguration : IEntityTypeConfiguration<PetCard>
 
         builder.HasKey(x => x.Id);
 
-        builder.Property(x => x.PetName).HasMaxLength(128);
+        builder.Property(x => x.PetName)
+            .HasMaxLength(64);
+
         builder.Property(x => x.PhotoUrl);
-        builder.Property(x => x.State).HasConversion<int>();
 
-        builder.OwnsMany(x => x.SocialLinks, sl =>
-        {
-            sl.ToTable("petcard_sociallinks");
+        builder.Property(x => x.State)
+            .HasConversion<int>();
 
-            sl.WithOwner().HasForeignKey("PetCardId");
+        builder.HasOne(x => x.Code)
+            .WithOne(x => x.PetCard)
+            .HasForeignKey<PetCard>(x => x.CodeId)
+            .OnDelete(DeleteBehavior.Restrict);
 
-            sl.Property(x => x.Type).HasConversion<int>();
-            sl.Property(x => x.Value).HasMaxLength(256);
-        });
+        builder.HasMany(x => x.SocialLinks)
+            .WithOne(x => x.PetCard)
+            .HasForeignKey(x => x.PetCardId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

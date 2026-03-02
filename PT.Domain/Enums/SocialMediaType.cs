@@ -2,7 +2,6 @@
 
 public enum SocialMediaType
 {
-    Undefined,
     Instagram,
     Telegram,
     TikTok,

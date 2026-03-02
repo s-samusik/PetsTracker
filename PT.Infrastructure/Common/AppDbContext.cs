@@ -7,7 +7,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 {
     public DbSet<User> Users => Set<User>();
     public DbSet<PetCard> PetCards => Set<PetCard>();
-
+    public DbSet<Code> Codes => Set<Code>();
+    public DbSet<SocialLink> SocialLinks => Set<SocialLink>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
