@@ -11,7 +11,7 @@ using PT.Infrastructure.Common;
 
 namespace PT.Infrastructure.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(PostgreSqlDbContext))]
     [Migration("20260302222805_ImproveDbStructure")]
     partial class ImproveDbStructure
     {

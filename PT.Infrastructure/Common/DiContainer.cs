@@ -1,13 +1,23 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace PT.Infrastructure.Common
+namespace PT.Infrastructure.Common;
+
+public static class DiContainer
 {
-    public static class DiContainer
+    public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+        var appConnectionString = configuration.GetConnectionString("PostgreDB");
+
+        services.AddDbContext<PostgreSqlDbContext>(opt =>
         {
-            //services.AddScoped<IUserRepository, UserRepository>();
-            return services;
-        }
+            opt.UseNpgsql(appConnectionString, sql =>
+            {
+                sql.MigrationsAssembly(typeof(PostgreSqlDbContext).Assembly.FullName);
+            });
+        });
+
+        //services.TryAddScoped<IRepository, Repository>();
     }
 }

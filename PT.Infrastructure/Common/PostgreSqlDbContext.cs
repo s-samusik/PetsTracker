@@ -3,7 +3,8 @@ using PT.Domain.Entities;
 
 namespace PT.Infrastructure.Common;
 
-public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
+public class PostgreSqlDbContext(DbContextOptions<PostgreSqlDbContext> options) 
+    : DbContext(options)
 {
     public DbSet<User> Users => Set<User>();
     public DbSet<PetCard> PetCards => Set<PetCard>();
@@ -12,6 +13,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(PostgreSqlDbContext).Assembly);
+
+        base.OnModelCreating(modelBuilder);
     }
 }
