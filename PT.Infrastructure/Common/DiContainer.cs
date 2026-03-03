@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using PT.Application.Interfaces.Repositories;
+using PT.Infrastructure.Repositories;
 
 namespace PT.Infrastructure.Common;
 
@@ -18,6 +21,8 @@ public static class DiContainer
             });
         });
 
-        //services.TryAddScoped<IRepository, Repository>();
+        services.TryAddScoped<ICodeRepository, CodeRepository>();
+        services.TryAddScoped<IPetCardRepository, PetCardRepository>();
+        services.TryAddScoped<IUserRepository, UserRepository>();
     }
 }
