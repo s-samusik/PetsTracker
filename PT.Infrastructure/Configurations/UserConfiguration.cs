@@ -13,7 +13,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.HasKey(x => x.Id);
         
         builder.Property(x => x.PhoneNumber)
-            .HasMaxLength(64);
+            .HasMaxLength(64)
+            .IsRequired();
         
         builder.HasMany(x => x.PetCards)
             .WithOne(x => x.User)

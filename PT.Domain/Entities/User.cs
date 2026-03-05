@@ -2,6 +2,6 @@
 
 public sealed class User : BaseEntity
 {
-    public string? PhoneNumber { get; set; }
+    public required string PhoneNumber { get; set; }
     public List<PetCard> PetCards { get; set; } = [];
 }
