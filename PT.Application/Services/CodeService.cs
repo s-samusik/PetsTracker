@@ -54,4 +54,19 @@ internal sealed class CodeService(ICodeFormat format, ICodeRepository repo) : IC
 
         return result;
     }
+
+    public async Task<Code?> GetAsync(Guid Id, CancellationToken ct = default)
+    {
+        return await _codeRepository.GetByIdAsync(Id, ct);
+    }
+
+    public async Task<Code?> GetByValueAsync(string code, CancellationToken ct = default)
+    {
+        return await _codeRepository.GetByValueAsync(code, ct);
+    }
+
+    public async Task<IReadOnlyList<Code>> GetAllByStateAsync(CodeState state, CancellationToken ct = default)
+    {
+        return await _codeRepository.GetAllByStateAsync(state, ct);    
+    }
 }
