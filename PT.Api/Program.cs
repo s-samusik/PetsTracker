@@ -1,3 +1,4 @@
+using PT.Api.Middlewares;
 using PT.Application.Common;
 using PT.Infrastructure.Common;
 using PT.Infrastructure.Extensions;
@@ -20,6 +21,7 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddFormats();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
+builder.Services.AddValidarors();
 
 var app = builder.Build();
 
@@ -28,6 +30,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 

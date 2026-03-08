@@ -19,11 +19,9 @@ internal abstract class BaseRepository<T>(DbContext context) : IBaseRepository<T
         _ = await _dbSet.AddAsync(entity, ct);
     }
 
-    public Task Update(T entity)
+    public void Update(T entity)
     {
         _dbSet.Update(entity);
-        
-        return Task.CompletedTask;
     }
 
     public async Task SaveChangesAsync(CancellationToken ct = default)
