@@ -10,6 +10,7 @@ public class UserController(IUserService userService) : ControllerBase
 {
     private readonly IUserService _userService = userService;
 
+
     [HttpGet("{number:maxlength(20)}")]
     public async Task<IActionResult> GetByPhoneNumberAsync(string number, CancellationToken ct = default)
     {

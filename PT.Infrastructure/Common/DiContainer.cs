@@ -21,6 +21,7 @@ public static class DiContainer
             });
         });
 
+        services.TryAddScoped<IUnitOfWork, UnitOfWork>();
         services.TryAddScoped<ICodeRepository, CodeRepository>();
         services.TryAddScoped<IPetCardRepository, PetCardRepository>();
         services.TryAddScoped<IUserRepository, UserRepository>();

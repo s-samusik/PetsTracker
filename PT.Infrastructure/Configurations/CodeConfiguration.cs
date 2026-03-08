@@ -20,7 +20,7 @@ public class CodeConfiguration : IEntityTypeConfiguration<Code>
                .IsUnique();
 
         builder.Property(x => x.State)
-            .HasConversion<int>();
+            .HasConversion<string>();
     }
 }
 

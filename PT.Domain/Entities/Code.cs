@@ -11,4 +11,16 @@ public sealed class Code : BaseEntity
 
     public Guid? PetCardId { get; set; }
     public PetCard? PetCard { get; set; }
+
+    public void AssignToCard(Guid petCardId)
+    {
+        if (State != CodeState.Generated)
+        {
+            throw new InvalidOperationException($"Cannot register card, invalid code: {Value}, state: {State}");
+        }
+
+        PetCardId = petCardId;
+        UpdatedAt = DateTime.UtcNow;
+        State = CodeState.Activated;
+    }
 }

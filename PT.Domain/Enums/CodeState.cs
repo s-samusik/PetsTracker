@@ -2,8 +2,8 @@
 
 public enum CodeState
 {
-    Undefined,
-    Generated, 
-    Activated,
-    Deactivated
+    Undefined = 0,
+    Generated = 2, 
+    Activated = 4,
+    Deactivated = 6,
 }

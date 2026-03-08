@@ -12,6 +12,7 @@ public class CodeController(ICodeService codeService) : ControllerBase
 {
     private readonly ICodeService _codeService = codeService;
 
+
     [HttpGet("{id:Guid}")]
     public async Task<IActionResult> GetAsync(Guid id, CancellationToken ct = default)
     {

@@ -18,7 +18,7 @@ public class PetCardConfiguration : IEntityTypeConfiguration<PetCard>
         builder.Property(x => x.PhotoUrl);
 
         builder.Property(x => x.State)
-            .HasConversion<int>();
+            .HasConversion<string>();
 
         builder.HasOne(x => x.Code)
             .WithOne(x => x.PetCard)

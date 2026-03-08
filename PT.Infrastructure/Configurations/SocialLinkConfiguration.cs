@@ -13,7 +13,7 @@ public class SocialLinkConfiguration : IEntityTypeConfiguration<SocialLink>
         builder.HasKey(x => x.Id);
 
         builder.Property(x => x.Type)
-            .HasConversion<int>();
+            .HasConversion<string>();
 
         builder.Property(x => x.Username)
             .HasMaxLength(64);

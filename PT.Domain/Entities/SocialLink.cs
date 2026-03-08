@@ -8,5 +8,5 @@ public sealed class SocialLink : BaseEntity
     public string? Username { get; set; }
     
     public Guid PetCardId { get; set; }
-    public PetCard PetCard { get; set; } = null!;
+    public PetCard? PetCard { get; set; }
 }

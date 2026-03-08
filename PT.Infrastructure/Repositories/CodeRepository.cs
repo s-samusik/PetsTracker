@@ -19,7 +19,6 @@ internal sealed class CodeRepository(PostgreSqlDbContext context) : BaseReposito
     public async Task<Code?> GetByValueAsync(string code, CancellationToken ct = default)
     {
         return await _dbSet
-            .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Value == code, ct);
     }
 }

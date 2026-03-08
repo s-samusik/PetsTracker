@@ -28,6 +28,9 @@ internal sealed class PetCardRepository(PostgreSqlDbContext context) : BaseRepos
     {
         return await _dbSet
             .AsNoTracking()
+            .Include(x => x.User)
+            .Include(x => x.Code)
+            .Include(x => x.SocialLinks)
             .FirstOrDefaultAsync(x => x.Code.Value == code, ct);
     }
 }

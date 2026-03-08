@@ -84,4 +84,10 @@ internal sealed class CodeService(ICodeFormat format, ICodeRepository codeReposi
 
         return await _codeRepository.GetAllByStateAsync(state, ct);
     }
+
+    public async Task UpdateAsync(Code code, CancellationToken ct = default)
+    {
+        _codeRepository.Update(code);
+        await _codeRepository.SaveChangesAsync(ct);
+    }
 }

@@ -17,7 +17,6 @@ internal sealed class UserRepository(PostgreSqlDbContext context) : BaseReposito
     public async Task<User?> GetByPhoneNumberAsync(string phoneNumber, CancellationToken ct = default)
     {
         return await _dbSet
-            .AsNoTracking()
             .FirstOrDefaultAsync(x => x.PhoneNumber == phoneNumber, ct);
     }
 }

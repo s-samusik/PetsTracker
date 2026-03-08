@@ -4,7 +4,8 @@ using PT.Domain.Entities;
 
 namespace PT.Application.Services;
 
-internal sealed class UserService(IUserRepository userRepository, PhoneNumberService phoneNumberService) : IUserService
+internal sealed class UserService
+    (IUserRepository userRepository, PhoneNumberService phoneNumberService) : IUserService
 {
     private readonly IUserRepository _userRepository = userRepository;
     private readonly PhoneNumberService _phoneNumberService = phoneNumberService;
@@ -42,5 +43,11 @@ internal sealed class UserService(IUserRepository userRepository, PhoneNumberSer
         await _userRepository.SaveChangesAsync(ct);
 
         return user;
+    }
+
+    public async Task UpdateAsync(User user, CancellationToken ct = default)
+    {
+        _userRepository.Update(user);
+        await _userRepository.SaveChangesAsync(ct);
     }
 }
