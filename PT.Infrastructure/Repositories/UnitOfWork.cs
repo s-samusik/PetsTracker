@@ -9,7 +9,6 @@ public sealed class UnitOfWork(PostgreSqlDbContext context) : IUnitOfWork
     private readonly PostgreSqlDbContext _context = context;
     private IDbContextTransaction? _transaction;
 
-
     public async Task BeginTransactionAsync(CancellationToken ct = default)
     {
         _transaction = await _context.Database.BeginTransactionAsync(ct);
@@ -18,7 +17,11 @@ public sealed class UnitOfWork(PostgreSqlDbContext context) : IUnitOfWork
     public async Task CommitAsync(CancellationToken ct = default)
     {
         await _context.SaveChangesAsync(ct);
-        await _transaction!.CommitAsync(ct);
+        
+        if (_transaction != null)
+        {
+            await _transaction.CommitAsync(ct);
+        }
     }
 
     public async Task RollbackAsync(CancellationToken ct = default)

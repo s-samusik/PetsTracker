@@ -12,8 +12,8 @@ using PT.Infrastructure.Common;
 namespace PT.Infrastructure.Migrations
 {
     [DbContext(typeof(PostgreSqlDbContext))]
-    [Migration("20260305225800_MarkPhoneAsRequired")]
-    partial class MarkPhoneAsRequired
+    [Migration("20260310004418_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace PT.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("PT.Domain.Entities.Code", b =>
+            modelBuilder.Entity("PT.Infrastructure.Entities.CodeEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -40,11 +40,12 @@ namespace PT.Infrastructure.Migrations
                     b.Property<DateTimeOffset?>("DeactivatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid?>("PetCardId")
+                    b.Property<Guid?>("PetCardEntityId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("State")
-                        .HasColumnType("integer");
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -62,13 +63,13 @@ namespace PT.Infrastructure.Migrations
                     b.ToTable("codes", (string)null);
                 });
 
-            modelBuilder.Entity("PT.Domain.Entities.PetCard", b =>
+            modelBuilder.Entity("PT.Infrastructure.Entities.PetCardEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("CodeId")
+                    b.Property<Guid>("CodeEntityId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTimeOffset>("CreatedAt")
@@ -81,26 +82,27 @@ namespace PT.Infrastructure.Migrations
                     b.Property<string>("PhotoUrl")
                         .HasColumnType("text");
 
-                    b.Property<int>("State")
-                        .HasColumnType("integer");
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("UserEntityId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CodeId")
+                    b.HasIndex("CodeEntityId")
                         .IsUnique();
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserEntityId");
 
                     b.ToTable("petcards", (string)null);
                 });
 
-            modelBuilder.Entity("PT.Domain.Entities.SocialLink", b =>
+            modelBuilder.Entity("PT.Infrastructure.Entities.SocialLinkEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -109,11 +111,12 @@ namespace PT.Infrastructure.Migrations
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("PetCardId")
+                    b.Property<Guid>("PetCardEntityId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("integer");
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -124,13 +127,13 @@ namespace PT.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PetCardId", "Type")
+                    b.HasIndex("PetCardEntityId", "Type")
                         .IsUnique();
 
                     b.ToTable("sociallinks", (string)null);
                 });
 
-            modelBuilder.Entity("PT.Domain.Entities.User", b =>
+            modelBuilder.Entity("PT.Infrastructure.Entities.UserEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -152,49 +155,49 @@ namespace PT.Infrastructure.Migrations
                     b.ToTable("users", (string)null);
                 });
 
-            modelBuilder.Entity("PT.Domain.Entities.PetCard", b =>
+            modelBuilder.Entity("PT.Infrastructure.Entities.PetCardEntity", b =>
                 {
-                    b.HasOne("PT.Domain.Entities.Code", "Code")
-                        .WithOne("PetCard")
-                        .HasForeignKey("PT.Domain.Entities.PetCard", "CodeId")
+                    b.HasOne("PT.Infrastructure.Entities.CodeEntity", "CodeEntity")
+                        .WithOne("PetCardEntity")
+                        .HasForeignKey("PT.Infrastructure.Entities.PetCardEntity", "CodeEntityId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("PT.Domain.Entities.User", "User")
-                        .WithMany("PetCards")
-                        .HasForeignKey("UserId")
+                    b.HasOne("PT.Infrastructure.Entities.UserEntity", "UserEntity")
+                        .WithMany("PetCardEntities")
+                        .HasForeignKey("UserEntityId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Code");
+                    b.Navigation("CodeEntity");
 
-                    b.Navigation("User");
+                    b.Navigation("UserEntity");
                 });
 
-            modelBuilder.Entity("PT.Domain.Entities.SocialLink", b =>
+            modelBuilder.Entity("PT.Infrastructure.Entities.SocialLinkEntity", b =>
                 {
-                    b.HasOne("PT.Domain.Entities.PetCard", "PetCard")
-                        .WithMany("SocialLinks")
-                        .HasForeignKey("PetCardId")
+                    b.HasOne("PT.Infrastructure.Entities.PetCardEntity", "PetCardEntity")
+                        .WithMany("SocialLinkEntities")
+                        .HasForeignKey("PetCardEntityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("PetCard");
+                    b.Navigation("PetCardEntity");
                 });
 
-            modelBuilder.Entity("PT.Domain.Entities.Code", b =>
+            modelBuilder.Entity("PT.Infrastructure.Entities.CodeEntity", b =>
                 {
-                    b.Navigation("PetCard");
+                    b.Navigation("PetCardEntity");
                 });
 
-            modelBuilder.Entity("PT.Domain.Entities.PetCard", b =>
+            modelBuilder.Entity("PT.Infrastructure.Entities.PetCardEntity", b =>
                 {
-                    b.Navigation("SocialLinks");
+                    b.Navigation("SocialLinkEntities");
                 });
 
-            modelBuilder.Entity("PT.Domain.Entities.User", b =>
+            modelBuilder.Entity("PT.Infrastructure.Entities.UserEntity", b =>
                 {
-                    b.Navigation("PetCards");
+                    b.Navigation("PetCardEntities");
                 });
 #pragma warning restore 612, 618
         }

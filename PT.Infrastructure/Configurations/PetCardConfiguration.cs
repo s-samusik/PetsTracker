@@ -1,33 +1,31 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using PT.Domain.Entities;
+using PT.Infrastructure.Entities;
 
 namespace PT.Infrastructure.Configurations;
 
-public class PetCardConfiguration : IEntityTypeConfiguration<PetCard>
+public class PetCardConfiguration : IEntityTypeConfiguration<PetCardEntity>
 {
-    public void Configure(EntityTypeBuilder<PetCard> builder)
+    public void Configure(EntityTypeBuilder<PetCardEntity> builder)
     {
         builder.ToTable("petcards");
 
         builder.HasKey(x => x.Id);
 
-        builder.Property(x => x.PetName)
-            .HasMaxLength(64);
-
+        builder.Property(x => x.PetName).HasMaxLength(64);
         builder.Property(x => x.PhotoUrl);
 
         builder.Property(x => x.State)
             .HasConversion<string>();
 
-        builder.HasOne(x => x.Code)
-            .WithOne(x => x.PetCard)
-            .HasForeignKey<PetCard>(x => x.CodeId)
+        builder.HasOne(x => x.CodeEntity)
+            .WithOne(x => x.PetCardEntity)
+            .HasForeignKey<PetCardEntity>(x => x.CodeEntityId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasMany(x => x.SocialLinks)
-            .WithOne(x => x.PetCard)
-            .HasForeignKey(x => x.PetCardId)
+        builder.HasMany(x => x.SocialLinkEntities)
+            .WithOne(x => x.PetCardEntity)
+            .HasForeignKey(x => x.PetCardEntityId)
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

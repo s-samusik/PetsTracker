@@ -1,4 +1,4 @@
-﻿namespace PT.Domain.Entities;
+﻿namespace PT.Infrastructure.Entities;
 
 public abstract class BaseEntity
 {

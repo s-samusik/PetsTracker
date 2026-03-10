@@ -1,31 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PT.Application.Interfaces.Repositories;
+using PT.Infrastructure.Common;
 
 namespace PT.Infrastructure.Repositories;
 
-internal abstract class BaseRepository<T>(DbContext context) : IBaseRepository<T> where T : class
+internal abstract class BaseRepository<TEntity>(PostgreSqlDbContext context)
+    where TEntity : class
 {
-    protected readonly DbContext _context = context;
-    protected readonly DbSet<T> _dbSet = context.Set<T>();
+    protected readonly PostgreSqlDbContext _context = context;
+    protected readonly DbSet<TEntity> _set = context.Set<TEntity>();
 
+    protected async Task<TEntity?> FindEntityAsync(Guid id, CancellationToken ct)
+        => await _set.FindAsync([id], ct);
 
-    public virtual async Task<T?> GetByIdAsync(Guid id, CancellationToken ct = default)
-    {
-        return await _dbSet.FindAsync([id], ct);
-    }
-
-    public async Task AddAsync(T entity, CancellationToken ct = default)
-    {
-        _ = await _dbSet.AddAsync(entity, ct);
-    }
-
-    public void Update(T entity)
-    {
-        _context.Entry(entity).State = EntityState.Modified;
-    }
-
-    public async Task SaveChangesAsync(CancellationToken ct = default)
-    {
-        _ = await _context.SaveChangesAsync(ct);
-    }
+    protected async Task AddEntityAsync(TEntity entity, CancellationToken ct)
+        => await _set.AddAsync(entity, ct);
 }

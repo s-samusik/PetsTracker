@@ -1,15 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PT.Domain.Entities;
+using PT.Infrastructure.Entities;
 
 namespace PT.Infrastructure.Common;
 
 public class PostgreSqlDbContext(DbContextOptions<PostgreSqlDbContext> options) 
     : DbContext(options)
 {
-    public DbSet<User> Users => Set<User>();
-    public DbSet<PetCard> PetCards => Set<PetCard>();
-    public DbSet<Code> Codes => Set<Code>();
-    public DbSet<SocialLink> SocialLinks => Set<SocialLink>();
+    public DbSet<UserEntity> Users => Set<UserEntity>();
+    public DbSet<PetCardEntity> PetCards => Set<PetCardEntity>();
+    public DbSet<CodeEntity> Codes => Set<CodeEntity>();
+    public DbSet<SocialLinkEntity> SocialLinks => Set<SocialLinkEntity>();
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -1,5 +1,5 @@
-﻿using PT.Domain.Entities;
-using PT.Domain.Enums;
+﻿using PT.Domain.Enums;
+using PT.Domain.Models;
 
 namespace PT.Application.Interfaces.Repositories;
 

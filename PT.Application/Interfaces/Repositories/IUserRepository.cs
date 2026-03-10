@@ -1,4 +1,4 @@
-﻿using PT.Domain.Entities;
+﻿using PT.Domain.Models;
 
 namespace PT.Application.Interfaces.Repositories;
 

@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using PT.Domain.Entities;
+using PT.Infrastructure.Entities;
 
 namespace PT.Infrastructure.Configurations;
 
-public class SocialLinkConfiguration : IEntityTypeConfiguration<SocialLink>
+public class SocialLinkConfiguration : IEntityTypeConfiguration<SocialLinkEntity>
 {
-    public void Configure(EntityTypeBuilder<SocialLink> builder)
+    public void Configure(EntityTypeBuilder<SocialLinkEntity> builder)
     {
         builder.ToTable("sociallinks");
 
@@ -18,8 +18,7 @@ public class SocialLinkConfiguration : IEntityTypeConfiguration<SocialLink>
         builder.Property(x => x.Username)
             .HasMaxLength(64);
 
-        builder.HasIndex(x => new { x.PetCardId, x.Type })
+        builder.HasIndex(x => new { x.PetCardEntityId, x.Type })
             .IsUnique();
     }
 }
-
