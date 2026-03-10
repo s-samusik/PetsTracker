@@ -5,7 +5,7 @@ using PT.Domain.Enums;
 
 namespace PT.Application.Services;
 
-internal sealed class CodeService
+public sealed class CodeService
     (ICodeFormat format, ICodeRepository codeRepository, IUnitOfWork uow) : ICodeService
 {
     private readonly ICodeFormat _format = format;

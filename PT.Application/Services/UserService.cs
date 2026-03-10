@@ -4,7 +4,7 @@ using PT.Domain.Models;
 
 namespace PT.Application.Services;
 
-internal sealed class UserService
+public sealed class UserService
     (IUserRepository userRepository, PhoneNumberService phoneNumberService, IUnitOfWork uow) : IUserService
 {
     private readonly IUserRepository _userRepository = userRepository;

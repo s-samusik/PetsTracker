@@ -6,7 +6,7 @@ using PT.Domain.Enums;
 
 namespace PT.Application.Services;
 
-internal sealed class PetCardService
+public sealed class PetCardService
     (IUnitOfWork uow, IPetCardRepository cardRepository, ICodeService codeService, IUserService userService)
     : IPetCardService
 {
