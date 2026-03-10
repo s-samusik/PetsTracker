@@ -1,7 +1,7 @@
 ﻿using PT.Application.Dtos;
 using PT.Application.Interfaces.Repositories;
 using PT.Application.Interfaces.Services;
-using PT.Domain.Entities;
+using PT.Domain.Models;
 using PT.Domain.Enums;
 
 namespace PT.Application.Services;
@@ -30,17 +30,19 @@ internal sealed class PetCardService
 
         try
         {
-            var code = await _codeService.GetByValueAsync(dto.Code, ct)
-                ?? throw new InvalidOperationException($"Code '{dto.Code}' not found");
+            var code = await _codeService.GetByValueAsync(dto.Code, ct);
 
             var user = await _userService.ExistsAsync(dto.PhoneNumber, ct)
                 ? await _userService.GetByPhoneAsync(dto.PhoneNumber, ct)
                 : await _userService.RegisterAsync(dto.PhoneNumber, ct);
 
-            var card = PetCard.Register(code, dto.PetName, user, dto.SocialLinks);
+            var links = dto.SocialLinks
+                .Select(x => SocialLink.Create(x.Type, x.Username))
+                .ToList();
 
-            code.AssignToCard(card.Id);
-            user.AddPetCard(card);
+            var card = PetCard.Register(user!, code!, dto.PetName, links);
+
+            code!.AssignToCard(card.Id);
 
             await _cardRepository.AddAsync(card, ct);
 

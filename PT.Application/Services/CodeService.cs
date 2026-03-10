@@ -1,17 +1,16 @@
-﻿using Npgsql;
-using PT.Application.Extensions;
-using PT.Application.Interfaces.Repositories;
+﻿using PT.Application.Interfaces.Repositories;
 using PT.Application.Interfaces.Services;
 using PT.Domain.CodeFormats;
-using PT.Domain.Entities;
 using PT.Domain.Enums;
 
 namespace PT.Application.Services;
 
-internal sealed class CodeService(ICodeFormat format, ICodeRepository codeRepository) : ICodeService
+internal sealed class CodeService
+    (ICodeFormat format, ICodeRepository codeRepository, IUnitOfWork uow) : ICodeService
 {
     private readonly ICodeFormat _format = format;
     private readonly ICodeRepository _codeRepository = codeRepository;
+    private readonly IUnitOfWork _uow = uow;
 
     public string Generate()
     {
@@ -21,12 +20,29 @@ internal sealed class CodeService(ICodeFormat format, ICodeRepository codeReposi
         return $"{baseCode}{checksum}";
     }
 
+    public bool Validate(string code)
+        => _format.ValidateFormat(code) && _format.ValidateChecksum(code);
+
+    public async Task<Code?> GetAsync(Guid id, CancellationToken ct = default)
+        => await _codeRepository.GetByIdAsync(id, ct);
+
+    public async Task<Code?> GetByValueAsync(string value, CancellationToken ct = default)
+        => await _codeRepository.GetByValueAsync(value, ct);
+
+    public async Task<IReadOnlyList<Code>> GetAllByStateAsync(CodeState state, CancellationToken ct = default)
+        => await _codeRepository.GetAllByStateAsync(state, ct);
+
+    public async Task UpdateAsync(Code code, CancellationToken ct = default)
+    {
+        _codeRepository.Update(code);
+        
+        await _uow.SaveChangesAsync(ct);
+    }
+
     public async Task<IReadOnlyList<Code>> GenerateBatchAsync(int count, CancellationToken ct = default)
     {
-        if (count < 1 || count > 1000)
-        {
-            throw new ArgumentException($"Count '{count}' is invalid, it should be between 1 and 1000");
-        }
+        if (count is < 1 or > 1000)
+            throw new ArgumentException("Count must be between 1 and 1000");
 
         var result = new List<Code>(count);
 
@@ -34,60 +50,20 @@ internal sealed class CodeService(ICodeFormat format, ICodeRepository codeReposi
         {
             try
             {
-                var entity = new Code { Value = Generate(), State = CodeState.Generated };
+                var value = Generate();
+                var code = Code.Generate(value);
 
-                await _codeRepository.AddAsync(entity, ct);
-                await _codeRepository.SaveChangesAsync(ct);
+                await _codeRepository.AddAsync(code, ct);
+                await _uow.SaveChangesAsync(ct);
 
-                result.Add(entity);
+                result.Add(code);
             }
-            catch (Exception ex) when (ex.IsPostgreDbError(PostgresErrorCodes.UniqueViolation))
+            catch (Exception ex) when (ex.Message.Contains("duplicate"))
             {
                 // the code is duplicate, just skip it
-            }
-            catch (Exception)
-            {
-                throw;
             }
         }
 
         return result;
-    }
-
-    public bool Validate(string code)
-        => _format.ValidateFormat(code) && _format.ValidateChecksum(code);
-
-    public async Task<Code?> GetAsync(Guid Id, CancellationToken ct = default)
-    {
-        var result = await _codeRepository.GetByIdAsync(Id, ct);
-
-        return result is null
-            ? throw new KeyNotFoundException($"Code with Id '{Id}' not found")
-            : result;
-    }
-
-    public async Task<Code?> GetByValueAsync(string code, CancellationToken ct = default)
-    {
-        var result = await _codeRepository.GetByValueAsync(code, ct);
-        
-        return result is null
-            ? throw new KeyNotFoundException($"Code '{code}' not found")
-            : result;
-    }
-
-    public async Task<IReadOnlyList<Code>> GetAllByStateAsync(CodeState state, CancellationToken ct = default)
-    {
-        if (!Enum.IsDefined(typeof(CodeState), state))
-        {
-            throw new ArgumentException($"Code state '{state}' is invalid");
-        }
-
-        return await _codeRepository.GetAllByStateAsync(state, ct);
-    }
-
-    public async Task UpdateAsync(Code code, CancellationToken ct = default)
-    {
-        _codeRepository.Update(code);
-        await _codeRepository.SaveChangesAsync(ct);
     }
 }

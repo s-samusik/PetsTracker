@@ -1,5 +1,4 @@
-﻿using PT.Domain.Entities;
-using PT.Domain.Enums;
+﻿using PT.Domain.Enums;
 
 namespace PT.Application.Interfaces.Services;
 

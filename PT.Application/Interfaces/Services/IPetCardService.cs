@@ -1,5 +1,5 @@
 ﻿using PT.Application.Dtos;
-using PT.Domain.Entities;
+using PT.Domain.Models;
 using PT.Domain.Enums;
 
 namespace PT.Application.Interfaces.Services;

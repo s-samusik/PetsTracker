@@ -1,14 +1,15 @@
 ﻿using PT.Application.Interfaces.Repositories;
 using PT.Application.Interfaces.Services;
-using PT.Domain.Entities;
+using PT.Domain.Models;
 
 namespace PT.Application.Services;
 
 internal sealed class UserService
-    (IUserRepository userRepository, PhoneNumberService phoneNumberService) : IUserService
+    (IUserRepository userRepository, PhoneNumberService phoneNumberService, IUnitOfWork uow) : IUserService
 {
     private readonly IUserRepository _userRepository = userRepository;
     private readonly PhoneNumberService _phoneNumberService = phoneNumberService;
+    private readonly IUnitOfWork _uow = uow;
 
     public async Task<bool> ExistsAsync(string number, CancellationToken ct = default)
     {
@@ -17,30 +18,24 @@ internal sealed class UserService
         return await _userRepository.ExistsAsync(phoneNumber, ct);
     }
 
-    public async Task<User> GetByPhoneAsync(string number, CancellationToken ct = default)
+    public async Task<User?> GetByPhoneAsync(string number, CancellationToken ct = default)
     {
         var phoneNumber = _phoneNumberService.NormalizeAndValidate(number);
-
-        var result = await _userRepository.GetByPhoneNumberAsync(phoneNumber, ct);
-
-        return result is null
-            ? throw new KeyNotFoundException($"User by phone number '{phoneNumber}' not found")
-            : result;
+        
+        return await _userRepository.GetByPhoneNumberAsync(phoneNumber, ct);
     }
 
     public async Task<User> RegisterAsync(string number, CancellationToken ct = default)
     {
-        if (await ExistsAsync(number, ct))
-        {
-            throw new InvalidOperationException($"User with phone number '{number}' already exists.");
-        }
-
         var phoneNumber = _phoneNumberService.NormalizeAndValidate(number);
 
-        var user = new User { Id = Guid.NewGuid(), PhoneNumber = phoneNumber };
+        if (await _userRepository.ExistsAsync(phoneNumber, ct))
+            throw new InvalidOperationException($"User '{phoneNumber}' already exists");
+
+        var user = User.Create(phoneNumber);
 
         await _userRepository.AddAsync(user, ct);
-        await _userRepository.SaveChangesAsync(ct);
+        await _uow.SaveChangesAsync(ct);
 
         return user;
     }
@@ -48,6 +43,7 @@ internal sealed class UserService
     public async Task UpdateAsync(User user, CancellationToken ct = default)
     {
         _userRepository.Update(user);
-        await _userRepository.SaveChangesAsync(ct);
+        
+        await _uow.SaveChangesAsync(ct);
     }
 }
