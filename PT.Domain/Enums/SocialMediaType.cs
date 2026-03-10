@@ -2,12 +2,11 @@
 
 public enum SocialMediaType
 {
-    Undefined,
-    Instagram,
-    Telegram,
-    TikTok,
-    WhatsApp,
-    Viber,
-    Odnoklassniki,
-    Vk
+    Instagram = 1,
+    Telegram = 2,
+    TikTok = 3,
+    WhatsApp = 4,
+    Viber = 5,
+    Odnoklassniki = 6,
+    Vk = 7,
 }

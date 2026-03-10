@@ -2,11 +2,62 @@
 
 namespace PT.Domain.Models;
 
-public class PetCard
+public sealed class PetCard : BaseEntity
 {
-    public Guid Id { get; set; }
-    public string? PetName { get; set; }
-    public CardState State { get; set; }
-    public string? PhotoUrl { get; set; }
-    public List<SocialLink> SocialLinks { get; set; } = new();
+    public string? PetName { get; private set; }
+    public CardState State { get; private set; }
+    public string? PhotoUrl { get; private set; }
+
+    public Guid UserId { get; private set; }
+    public Guid CodeId { get; private set; }
+
+    private readonly List<SocialLink> _socialLinks = [];
+    public IReadOnlyList<SocialLink> SocialLinks => _socialLinks;
+
+    private PetCard(Guid userId, Guid codeId, string? petName, IEnumerable<SocialLink> links)
+    {
+        UserId = userId;
+        CodeId = codeId;
+        PetName = petName;
+        State = CardState.Registered;
+        _socialLinks.AddRange(links);
+    }
+
+    public PetCard(
+        Guid id,
+        Guid userId,
+        Guid codeId,
+        string? petName,
+        string? photoUrl,
+        CardState state,
+        DateTimeOffset createdAt,
+        DateTimeOffset? updatedAt,
+        IEnumerable<SocialLink> links)
+    {
+        Id = id;
+        UserId = userId;
+        CodeId = codeId;
+        PetName = petName;
+        PhotoUrl = photoUrl;
+        State = state;
+        CreatedAt = createdAt;
+        UpdatedAt = updatedAt;
+        _socialLinks.AddRange(links);
+    }
+
+
+    public static PetCard Register(User user, Code code, string? petName, IEnumerable<SocialLink> links)
+    {
+        return code.State == CodeState.Generated
+            ? new PetCard(user.Id, code.Id, petName, links)
+            : throw new InvalidOperationException($"Code: '{code.Value}' is not valid, state: '{code.State}'");
+    }
+
+    public void AddSocialLink(SocialLink link)
+    {
+        _socialLinks.Add(link);
+
+        MarkUpdated();
+    }
 }
+

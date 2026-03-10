@@ -2,8 +2,7 @@
 
 public enum CardState
 {
-    Undefined,
-    Created,
-    Registered,
-    Deactivated
+    Undefined = 0,
+    Registered = 2,
+    Deactivated = 4
 }

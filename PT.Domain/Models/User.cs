@@ -1,10 +1,20 @@
-﻿using PT.Domain.Enums;
+﻿namespace PT.Domain.Models;
 
-namespace PT.Domain.Models;
-
-public class User
+public sealed class User : BaseEntity
 {
-    public Guid Id { get; set; }
-    public string? PhoneNumber { get; set; }
-    public List<PetCard> PetCards { get; set; } = [];
+    public string PhoneNumber { get; private set; }
+
+    private User(string phoneNumber)
+        => PhoneNumber = phoneNumber;
+
+    public User(Guid id, string phone, DateTimeOffset createdAt, DateTimeOffset? updatedAt)
+    {
+        Id = id;
+        PhoneNumber = phone;
+        CreatedAt = createdAt;
+        UpdatedAt = updatedAt;
+    }
+
+    public static User Create(string phoneNumber)
+        => new(phoneNumber);
 }
