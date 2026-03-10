@@ -45,6 +45,7 @@ internal sealed class PetCardService
             code!.AssignToCard(card.Id);
 
             await _cardRepository.AddAsync(card, ct);
+            await _codeService.UpdateAsync(code, ct);
 
             await _uow.CommitAsync(ct);
 

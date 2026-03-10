@@ -21,7 +21,7 @@ public class PetCardController(IPetCardService petCardService) : ControllerBase
         var response = new PetCardResponse
         (
             card.Id,
-            card.Code.Value,
+            code,
             card.PetName,
             card.PhotoUrl,
             card.State,
@@ -43,7 +43,7 @@ public class PetCardController(IPetCardService petCardService) : ControllerBase
         var response = new PetCardResponse
         (
             card.Id,
-            card.Code.Value,
+            request.Code,
             card.PetName,
             card.PhotoUrl,
             card.State,

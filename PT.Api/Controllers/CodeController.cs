@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PT.Api.Models;
 using PT.Application.Interfaces.Services;
-using PT.Domain.Entities;
 using PT.Domain.Enums;
 
 namespace PT.Api.Controllers;

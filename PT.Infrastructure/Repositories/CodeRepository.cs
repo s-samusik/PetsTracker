@@ -52,6 +52,7 @@ internal sealed class CodeRepository(PostgreSqlDbContext context) : ICodeReposit
         entity.ActivatedAt = model.ActivatedAt;
         entity.DeactivatedAt = model.DeactivatedAt;
         entity.PetCardEntityId = model.PetCardId;
+        entity.UpdatedAt = model.UpdatedAt;
     }
 
     public async Task SaveChangesAsync(CancellationToken ct = default)
