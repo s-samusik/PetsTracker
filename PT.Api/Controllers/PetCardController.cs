@@ -20,7 +20,7 @@ public class PetCardController(IPetCardService petCardService) : ControllerBase
 
         var response = new PetCardResponse
         (
-            card.Id,
+            card!.Id,
             code,
             card.PetName,
             card.PhotoUrl,
@@ -52,4 +52,27 @@ public class PetCardController(IPetCardService petCardService) : ControllerBase
 
         return Created(string.Empty, response);
     }
+
+    [HttpPost("{cardId:guid}/avatar")]
+    [RequestSizeLimit(10_000_000)] // 10 MB
+    public async Task<IActionResult> UploadAvatarAsync(
+        Guid cardId,
+        IFormFile file,
+        CancellationToken ct = default)
+    {
+        if (file is null || file.Length == 0)
+            return BadRequest("File is required");
+
+        await using var stream = file.OpenReadStream();
+
+        var url = await _petCardService.UploadAvatarAsync(
+            cardId,
+            stream,
+            file.ContentType,
+            ct
+        );
+
+        return Ok(new { Url = url });
+    }
+
 }

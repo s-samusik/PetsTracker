@@ -53,9 +53,9 @@ public sealed class PetCard : BaseEntity
             : throw new InvalidOperationException($"Code: '{code.Value}' is not valid, state: '{code.State}'");
     }
 
-    public void AddSocialLink(SocialLink link)
+    public void UpdatePhoto(string url)
     {
-        _socialLinks.Add(link);
+        PhotoUrl = url;
 
         MarkUpdated();
     }
