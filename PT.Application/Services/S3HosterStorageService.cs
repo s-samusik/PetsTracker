@@ -25,11 +25,13 @@ public sealed class S3HosterStorageService(
             BucketName = _options.Bucket,
             Key = fileName,
             InputStream = stream,
-            ContentType = contentType
+            ContentType = contentType,
+            DisablePayloadSigning = true,
+            DisableDefaultChecksumValidation = true
         };
 
         await _s3.PutObjectAsync(request, ct);
 
-        return $"{_options.Endpoint}/{_options.Bucket}/{fileName}";
+        return $"{_options.PublicEndpoint}/{fileName}";
     }
 }
