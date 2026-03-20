@@ -1,0 +1,45 @@
+﻿<MudCard Style="max-width: 350px;">
+
+    @if (IsLoading)
+    {
+        <MudSkeleton Height="200px" Animation="Animation.Pulse" />
+
+        <MudCardContent>
+            <MudSkeleton Width="60%" Height="24px" Class="mb-2" />
+            <MudSkeleton Width="80%" Height="18px" Class="mb-1" />
+            <MudSkeleton Width="70%" Height="18px" Class="mb-1" />
+            <MudSkeleton Width="50%" Height="18px" Class="mb-1" />
+        </MudCardContent>
+
+        <MudCardActions>
+            <MudSkeleton Width="100px" Height="36px" Class="mr-2" />
+            <MudSkeleton Width="120px" Height="36px" />
+        </MudCardActions>
+    }
+    else
+    {
+        <MudCardMedia Image="@Pet.PhotoUrl"
+                      Height="200" />
+
+        <MudCardContent>
+            <MudText Typo="Typo.h5">@Pet.Nickname</MudText>
+
+            <MudText><b>Адрес:</b> @Pet.Address</MudText>
+
+            <MudDivider Class="my-2" />
+
+            <MudText><b>Код:</b> @Manual.Code</MudText>
+
+            <MudDivider Class="my-2" />
+
+            <MudText><b>Хозяин:</b> @Owner.Name</MudText>
+            <MudText><b>Телефон:</b> @Owner.Phone</MudText>
+
+            @foreach (var sn in Owner.SocialNicks)
+            {
+                <MudText><b>@sn.Key:</b> @sn.Value</MudText>
+            }
+        </MudCardContent>
+    }
+
+</MudCard>

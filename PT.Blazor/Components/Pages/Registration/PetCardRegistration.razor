@@ -1,0 +1,49 @@
+﻿@page "/registration/{code}"
+
+@using PT.Blazor.Components.Pages.Registration.Forms
+
+@if (_completed)
+{
+    <CongratulationsForm Code="@Code" />
+}
+else
+{
+    <MudStepper @bind-ActiveIndex="_index"
+                CompletedStepColor="Color.Success"
+                CenterLabels="true"
+                CurrentStepColor="Color.Primary">
+
+        <ChildContent>
+            <MudStep Style="height: 70dvh">0</MudStep>
+            <MudStep Style="height: 70dvh">1</MudStep>
+            <MudStep Style="height: 70dvh">2</MudStep>
+            <MudStep Style="height: 70dvh" @bind-Completed="_completed">3</MudStep>
+        </ChildContent>
+        <ActionContent Context="stepper">
+            <MudButton Variant="Variant.Text"
+                       OnClick="@(() => stepper.PreviousStepAsync())"
+                       StartIcon="@Icons.Material.Filled.ArrowBackIos"
+                       Disabled="@(_index <= 1)">
+                Назад
+            </MudButton>
+            <MudSpacer />
+            @if (_index == 3)
+            {
+                <MudButton Variant="Variant.Outlined"
+                           Color="Color.Success"
+                           OnClick="@(() => stepper.NextStepAsync())"
+                           EndIcon="@Icons.Material.Filled.Check">
+                    Зарегистрировать
+                </MudButton>
+            }
+            else
+            {
+                <MudButton Variant="Variant.Text"
+                           OnClick="@(() => stepper.NextStepAsync())"
+                           EndIcon="@Icons.Material.Filled.ArrowForwardIos">
+                    Дальше
+                </MudButton>
+            }
+        </ActionContent>
+    </MudStepper>
+}

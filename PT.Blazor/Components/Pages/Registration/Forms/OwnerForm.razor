@@ -1,0 +1,28 @@
+﻿<MudForm>
+
+    <MudTextField Label="Имя"
+                  @bind-Value="Model.Name"
+                  For="@(() => Model.Name)" />
+
+    <MudTextField Label="Телефон"
+                  @bind-Value="Model.Phone"
+                  Required="true"
+                  For="@(() => Model.Phone)" />
+
+    <MudText Typo="Typo.subtitle1" Class="mt-4">Соц. сети</MudText>
+
+    @foreach (var key in Model.SocialNicks.Keys.ToList())
+    {
+        <MudTextField Label="@key"
+                      @bind-Value="Model.SocialNicks[key]"
+                      Class="mb-2" />
+    }
+
+    <MudButton Variant="Variant.Outlined"
+               Color="Color.Primary"
+               OnClick="AddSocial">
+        Добавить соц. сеть
+    </MudButton>
+
+   
+</MudForm>
