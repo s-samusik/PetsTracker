@@ -3,9 +3,9 @@
           Class="pa-2"
           Style="height: 90dvh">
     <MudIcon Class="mt-6"
-             Icon="@Icons.Material.Filled.CheckCircleOutline" 
-             Color="Color.Success"
-             Size="Size.Large" />
+             Style="font-size: 6rem;"
+             Icon="@Icons.Material.Filled.DoneAll" 
+             Color="Color.Success" />
 
     <MudText Typo="Typo.h5" Align="Align.Center" Class="mt-4">
         Поздравляем!
@@ -19,16 +19,16 @@
 
     <MudSpacer />
 
+    <MudButton Variant="Variant.Outlined"
+               Color="Color.Tertiary"
+               FullWidth="true"
+               OnClick="GoToCard">
+        Показать карточку
+    </MudButton>
     <MudButton Variant="Variant.Text"
                Color="Color.Default"
                FullWidth="true"
                OnClick="GoHome">
         На главную
-    </MudButton>
-    <MudButton Variant="Variant.Outlined"
-               Color="Color.Default"
-               FullWidth="true"
-               OnClick="GoToCard">
-        Показать карточку 
     </MudButton>
 </MudStack>

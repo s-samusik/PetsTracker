@@ -1,10 +1,22 @@
 using Microsoft.AspNetCore.Components;
-using MudBlazor;
-using PT.Blazor.Models;
 
 namespace PT.Blazor.Components.Pages.Registration.Forms;
 
 public partial class ManualCodeEntryForm
 {
-    public string Code { get; set; }
+    [Parameter] public string Code { get; set; } = default!;
+
+    [Inject] private NavigationManager Nav { get; set; } = default!;
+
+    private string manualCode;
+
+    void GoToRegistration()
+    {
+        Nav.NavigateTo($"/{Code}");
+    }
+
+    void GoHome()
+    {
+        Nav.NavigateTo("/");
+    }
 }

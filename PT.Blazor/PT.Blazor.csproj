@@ -4,10 +4,16 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>29e57730-20b1-4137-a7fe-fda972f4c977</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="MudBlazor" Version="9.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<ProjectReference Include="..\PT.Infrastructure\PT.Infrastructure.csproj" />
+    <ProjectReference Include="..\PT.Application\PT.Application.csproj" />
   </ItemGroup>
 
 </Project>

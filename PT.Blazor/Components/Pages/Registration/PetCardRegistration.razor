@@ -2,13 +2,18 @@
 
 @using PT.Blazor.Components.Pages.Registration.Forms
 
-@if (_completed)
+
+@if (codeNotFound)
+{
+    <ManualCodeEntryForm Code="@Code" />
+}
+else if (completed)
 {
     <CongratulationsForm Code="@Code" />
 }
 else
 {
-    <MudStepper @bind-ActiveIndex="_index"
+    <MudStepper @bind-ActiveIndex="index"
                 CompletedStepColor="Color.Success"
                 CenterLabels="true"
                 CurrentStepColor="Color.Primary">
@@ -16,17 +21,16 @@ else
         <ChildContent>
             <MudStep Style="height: 70dvh">0</MudStep>
             <MudStep Style="height: 70dvh">1</MudStep>
-            <MudStep Style="height: 70dvh">2</MudStep>
-            <MudStep Style="height: 70dvh" @bind-Completed="_completed">3</MudStep>
+            <MudStep Style="height: 70dvh" @bind-Completed="completed">3</MudStep>
         </ChildContent>
         <ActionContent Context="stepper">
             <MudButton Variant="Variant.Text"
                        OnClick="@(() => stepper.PreviousStepAsync())"
                        StartIcon="@Icons.Material.Filled.ArrowBackIos"
-                       Disabled="@(_index <= 1)">
+                       Disabled="@(index < 1)">
             </MudButton>
             <MudSpacer />
-            @if (_index == 3)
+            @if (index == 2)
             {
                 <MudButton Variant="Variant.Outlined"
                            Color="Color.Success"
