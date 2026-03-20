@@ -1,3 +1,13 @@
 ﻿@inherits LayoutComponentBase
 
-@Body
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<div style="background-color: #f0f0f0; min-height: 100dvh; display:flex; justify-content:center; align-items:center; padding:10px;">
+    <MudPaper Elevation="3"
+              Class="pa-4"
+              Style="width:100%; max-width:800px; border-radius:10px; min-height:95dvh;">
+        @Body
+    </MudPaper>
+</div>
