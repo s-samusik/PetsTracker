@@ -1,22 +1,22 @@
 using Microsoft.AspNetCore.Components;
 
-namespace PT.Blazor.Components.Pages.Registration.Forms;
+namespace PT.Blazor.Components.Registration;
 
-public partial class ManualCodeEntryForm
+public partial class ManualCodeEntryComponent
 {
     [Parameter] public string Code { get; set; } = default!;
 
     [Inject] private NavigationManager Nav { get; set; } = default!;
 
-    private string manualCode;
+    private string manualCode = null!;
 
     void GoToRegistration()
     {
-        Nav.NavigateTo($"/{Code}");
+        Nav.NavigateTo($"/card/{manualCode}", forceLoad: true);
     }
 
     void GoHome()
     {
-        Nav.NavigateTo("/");
+        Nav.NavigateTo("/", forceLoad: true);
     }
 }

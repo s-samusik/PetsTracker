@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Components;
 
-namespace PT.Blazor.Components.Pages.Registration.Forms;
+namespace PT.Blazor.Components.Registration;
 
-public partial class CongratulationsForm
+public partial class CongratulationsComponent
 {
     [Parameter] public string Code { get; set; } = default!;
 
@@ -10,11 +10,11 @@ public partial class CongratulationsForm
 
     void GoToCard()
     {
-        Nav.NavigateTo($"/{Code}");
+        Nav.NavigateTo($"/card/{Code}", forceLoad: true);
     }
 
     void GoHome()
     {
-        Nav.NavigateTo("/");
+        Nav.NavigateTo("/", forceLoad: true);
     }
 }

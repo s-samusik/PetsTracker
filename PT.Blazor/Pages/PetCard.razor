@@ -1,0 +1,39 @@
+﻿@page "/card/{Code}"
+
+@using PT.Blazor.Enums
+@using PT.Blazor.Components.Registration
+
+@if (State.Current == PetCardState.Loading)
+{
+    <div class="d-flex justify-center align-center" style="height: 80vh;">
+        <MudProgressCircular Color="Color.Primary"
+                             Style="height:70px; width:70px;"
+                             Indeterminate="true" />
+    </div>
+}
+else
+{
+    @switch (State.Current)
+    {
+        case PetCardState.Active:
+            <PetCardComponent />
+            break;
+
+        case PetCardState.CodeNotFound:
+            <ManualCodeEntryComponent Code="@Code" />
+            break;
+
+        case PetCardState.Registered:
+            <CongratulationsComponent Code="@Code" />
+            break;
+
+        case PetCardState.Registering:
+            <RegistrationStepper OnFinish="HandleFinishRegistration" />
+            break;
+
+        default:
+            <StartRegistrationComponent Code="@Code"
+                                        OnStart="HandleStartRegistration" />
+            break;
+    }
+}

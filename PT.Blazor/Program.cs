@@ -1,6 +1,7 @@
 using MudBlazor.Services;
 using PT.Application.Common;
-using PT.Blazor.Components;
+using PT.Blazor;
+using PT.Blazor.Services;
 using PT.Infrastructure.Common;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,8 @@ builder.Services.AddApplication();
 builder.Services.AddValidarors();
 builder.Services.AddImageProcessing();
 builder.Services.AddAwsStorage(builder.Configuration);
+
+builder.Services.AddScoped<PetCardStateMachine>();
 
 var app = builder.Build();
 

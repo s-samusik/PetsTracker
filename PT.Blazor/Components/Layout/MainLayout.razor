@@ -4,10 +4,16 @@
 <MudDialogProvider />
 <MudSnackbarProvider />
 
+<PageTitle>my-pets.online</PageTitle>
+
 <div style="background-color: #f0f0f0; min-height: 100dvh; display:flex; justify-content:center; align-items:center; padding:10px;">
-    <MudPaper Elevation="3"
-              Class="pa-4"
-              Style="width:100%; max-width:800px; border-radius:10px; min-height:95dvh;">
-        @Body
-    </MudPaper>
+    <MudGrid Justify="Justify.Center">
+        <MudItem xs="11" sm="8" md="6" lg="4">
+            <MudPaper Elevation="3"
+                      Class="pa-2"
+                      Style="border-radius:10px; min-height:95dvh;">
+                @Body
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
 </div>

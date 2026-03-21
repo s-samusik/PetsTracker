@@ -1,0 +1,45 @@
+﻿<MudStepper @bind-ActiveIndex="index"
+            CompletedStepColor="Color.Success"
+            CenterLabels="true"
+            CurrentStepColor="Color.Primary">
+
+    <ChildContent>
+        <MudStep Style="height: 70dvh">
+            <OwnerComponent />
+        </MudStep>
+        <MudStep Style="height: 70dvh">
+            <PetComponent />
+        </MudStep>
+        <MudStep Style="height: 70dvh" @bind-Completed="completed">
+            <PreviewComponent />
+        </MudStep>
+    </ChildContent>
+
+    <ActionContent Context="stepper">
+        <MudButton Variant="Variant.Text"
+                   OnClick="@(() => stepper.PreviousStepAsync())"
+                   StartIcon="@Icons.Material.Filled.ArrowBackIos"
+                   Disabled="@(index < 1)">
+        </MudButton>
+
+        <MudSpacer />
+
+        @if (index == 2)
+        {
+            <MudButton Variant="Variant.Outlined"
+                       Color="Color.Success"
+                       OnClick="@OnRegisterClick"
+                       EndIcon="@Icons.Material.Filled.Check">
+                Зарегистрировать
+            </MudButton>
+        }
+        else
+        {
+            <MudButton Variant="Variant.Text"
+                       OnClick="@(() => stepper.NextStepAsync())"
+                       EndIcon="@Icons.Material.Filled.ArrowForwardIos">
+                Дальше
+            </MudButton>
+        }
+    </ActionContent>
+</MudStepper>
