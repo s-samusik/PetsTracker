@@ -24,6 +24,7 @@ public class PetCardController(IPetCardService petCardService) : ControllerBase
             code,
             card.PetName,
             card.PhotoUrl,
+            card.Address,
             card.State,
             [.. card.SocialLinks.Select(x => new SocialLinkResponse(x.Type, x.Username))]
         );
@@ -36,7 +37,7 @@ public class PetCardController(IPetCardService petCardService) : ControllerBase
     public async Task<IActionResult> RegisterAsync(PetCardRegisterRequest request, CancellationToken ct = default)
     {
         var dto = new RegisterPetCardDto
-            (request.Code, request.PhoneNumber, request.PetName, request.SocialLinks);
+            (request.Code, request.PhoneNumber, request.PetName, request.Address, request.SocialLinks);
 
         var card = await _petCardService.RegisterAsync(dto, ct);
 
@@ -46,6 +47,7 @@ public class PetCardController(IPetCardService petCardService) : ControllerBase
             request.Code,
             card.PetName,
             card.PhotoUrl,
+            card.Address,
             card.State,
             [.. card.SocialLinks.Select(x => new SocialLinkResponse(x.Type, x.Username))]
         );

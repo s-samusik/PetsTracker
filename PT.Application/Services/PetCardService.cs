@@ -47,7 +47,7 @@ public sealed class PetCardService(
                 .Select(x => SocialLink.Create(x.Type, x.Username))
                 .ToList();
 
-            var card = PetCard.Register(user!, code!, dto.PetName, links);
+            var card = PetCard.Register(user!, code!, dto.PetName, dto.Address, links);
 
             code!.AssignToCard(card.Id);
 

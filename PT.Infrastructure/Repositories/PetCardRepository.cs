@@ -69,6 +69,7 @@ internal sealed class PetCardRepository(PostgreSqlDbContext context) : IPetCardR
         entity.PetName = model.PetName;
         entity.PhotoUrl = model.PhotoUrl;
         entity.State = model.State;
+        entity.Address = model.Address;
 
         entity.UserEntityId = model.UserId;
         entity.CodeEntityId = model.CodeId;
