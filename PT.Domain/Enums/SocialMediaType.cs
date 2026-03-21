@@ -5,8 +5,4 @@ public enum SocialMediaType
     Instagram,
     Telegram,
     TikTok,
-    WhatsApp,
-    Viber,
-    Odnoklassniki,
-    Vk, 
 }
