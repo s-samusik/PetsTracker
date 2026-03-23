@@ -1,7 +1,7 @@
 ﻿<MudStack Spacing="2"
           AlignItems="AlignItems.Center"
           Class="pa-2"
-          Style="height: 90dvh">
+          Style="height: 100%">
     <MudIcon Class="mt-6"
              Style="font-size: 6rem;"
              Icon="@Icons.Material.Filled.ErrorOutline"
@@ -15,16 +15,14 @@
     </MudText>
 
     <MudGrid Justify="Justify.Center">
-        <MudItem xs="8">
-            <MudTextField ShrinkLabel
-                          @bind-Value="manualCode"
-                          Label="QR Код"
-                          Variant="Variant.Outlined"
+        <MudItem xs="6" sm="4">
+            <MudTextField @bind-Value="manualCode"
+                          Variant="Variant.Text"
+                          Margin="Margin.Dense"
                           T="string"
-                          MaxLength="7"
-                          Typo="Typo.button"
-                          HelperText="Код указан на карточке под изображением QR,формат: АА11ААА"
-                          Mask="@(new PatternMask("aa00aaa"))" />
+                          Typo="Typo.h6"
+                          HelperText="формат: AA-11-AAA"
+                          Mask="@QrCodeMask" />
         </MudItem>
     </MudGrid>
 
