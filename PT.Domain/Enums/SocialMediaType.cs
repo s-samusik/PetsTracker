@@ -5,4 +5,5 @@ public enum SocialMediaType
     Instagram,
     Telegram,
     TikTok,
+    Viber
 }

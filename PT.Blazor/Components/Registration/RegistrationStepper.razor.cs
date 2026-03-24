@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Components;
+using PT.Blazor.Models;
 
 namespace PT.Blazor.Components.Registration;
 
 public partial class RegistrationStepper : ComponentBase
 {
-    [Parameter] public EventCallback OnFinish { get; set; }
+    [Parameter] public PetCardModel PetCardModel { get; set; } = default!;
+    [Parameter] public EventCallback OnFinish { get; set; } = default!;
 
     private int index;
     private bool completed;
@@ -12,7 +14,6 @@ public partial class RegistrationStepper : ComponentBase
     private async Task OnRegisterClick()
     {
         completed = true;
-
         await OnFinish.InvokeAsync();
     }
 }

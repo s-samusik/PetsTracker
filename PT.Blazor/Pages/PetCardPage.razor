@@ -28,7 +28,7 @@ else
             break;
 
         case PetCardState.Registering:
-            <RegistrationStepper OnFinish="HandleFinishRegistration" />
+            <RegistrationStepper PetCardModel="PetCardModel" OnFinish="HandleFinishRegistration" />
             break;
 
         default:

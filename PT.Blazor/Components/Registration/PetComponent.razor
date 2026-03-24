@@ -10,7 +10,7 @@
     <MudGrid>
         <MudItem xs="12" Class="d-flex justify-center">
             <MudAvatar Style="height:120px; width:120px; background-color:#f0f0f0">
-                @if (string.IsNullOrWhiteSpace(avatarPreview))
+                @if (string.IsNullOrWhiteSpace(PetCardModel.AvatarPreview))
                 {
                     <MudIcon Icon="@Icons.Material.Filled.Pets"
                              Style="font-size: 6rem;"
@@ -18,13 +18,13 @@
                 }
                 else
                 {
-                    <MudImage Src="@avatarPreview"
+                    <MudImage Src="@PetCardModel.AvatarPreview"
                               Style="height:100%; width:100%; object-fit:cover;" />
                 }
             </MudAvatar>
         </MudItem>
         <MudItem xs="12" Class="d-flex justify-center">
-            <MudFileUpload @bind-Files="@uploadedAvatar"
+            <MudFileUpload @bind-Files="PetCardModel.Avatar"
                            OnFilesChanged="@SwapPicture"
                            Accept="image/*"
                            MaxFiles="1"
@@ -41,7 +41,7 @@
     </MudGrid>
     <MudGrid Justify="Justify.Center">
         <MudItem xs="12" sm="9">
-            <MudTextField @bind-Value="petname"
+            <MudTextField @bind-Value="PetCardModel.PetName"
                           Label="кличка"
                           Counter="30"
                           MaxLength="30"
@@ -65,7 +65,7 @@
 
     <MudGrid Justify="Justify.Center">
         <MudItem xs="12" sm="9">
-            <MudTextField @bind-Value="city"
+            <MudTextField @bind-Value="PetCardModel.Address"
                           Label="адрес"
                           Counter="50"
                           MaxLength="50"

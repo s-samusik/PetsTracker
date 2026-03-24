@@ -13,7 +13,7 @@
                 Укажите, пожалуйста,<br />
                 номер телефона для связи
             </MudText>
-            <MudTextField @bind-Value="phoneNumber"
+            <MudTextField @bind-Value="PetCardModel.PhoneNumber"
                           Mask="@(new PatternMask("+000 (00) 000-00-00"))"
                           HelperText="формат: +375 (XX) XXX-XX-XX"
                           Variant="Variant.Text"
@@ -33,18 +33,19 @@
         </MudItem>
         <MudItem xs="11" sm="9">
             <MudSelect T="string"
-                       SelectedValues="SelectedSocials"
+                       SelectedValues="PetCardModel.SelectedSocials"
                        FullWidth
                        SelectedValuesChanged="OnSelectedSocialsChanged"
                        MultiSelection="true">
                 <MudSelectItem Value="@("Instagram")">Instagram</MudSelectItem>
                 <MudSelectItem Value="@("Telegram")">Telegram</MudSelectItem>
+                <MudSelectItem Value="@("Viber")">Viber</MudSelectItem>
                 <MudSelectItem Value="@("TikTok")">TikTok</MudSelectItem>
             </MudSelect>
             <br />
-            @foreach (var social in SelectedSocials)
+            @foreach (var social in PetCardModel.SelectedSocials)
             {
-                <MudTextField @bind-Value="SocialNicks[social]"
+                <MudTextField @bind-Value="PetCardModel.SocialLinks[social]"
                               Variant="Variant.Text"
                               FullWidth
                               Counter="30"

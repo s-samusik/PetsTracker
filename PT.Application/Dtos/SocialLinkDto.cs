@@ -4,5 +4,5 @@ namespace PT.Application.Dtos;
 
 public sealed record SocialLinkDto(
     SocialMediaType Type,
-    string? Username
+    string Username
 );

@@ -1,18 +1,25 @@
 using Microsoft.AspNetCore.Components;
 using PT.Application.Interfaces.Services;
+using PT.Blazor.Models;
 using PT.Blazor.Services;
 using PT.Domain.Enums;
-using System.Reflection.PortableExecutable;
 
 namespace PT.Blazor.Pages;
 
-public partial class PetCard : ComponentBase
+public partial class PetCardPage : ComponentBase
 {
     [Parameter] public string Code { get; set; } = default!;
 
     [Inject] private ICodeService CodeService { get; set; } = default!;
     [Inject] private PetCardStateMachine State { get; set; } = default!;
     [Inject] private NavigationManager Nav {  get; set; } = default!;
+
+    private PetCardModel PetCardModel = default!;
+
+    protected override void OnInitialized()
+    {
+        PetCardModel = new PetCardModel { Code = Code };
+    }
 
     protected override async Task OnParametersSetAsync()
     {

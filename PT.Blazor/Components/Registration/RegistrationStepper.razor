@@ -4,14 +4,14 @@
             CurrentStepColor="Color.Primary">
 
     <ChildContent>
-        <MudStep Style="height: 70dvh">
-            <OwnerComponent />
+        <MudStep Style="height: 73dvh">
+            <OwnerComponent PetCardModel="PetCardModel" />
         </MudStep>
-        <MudStep Style="height: 70dvh">
-            <PetComponent />
+        <MudStep Style="height: 73dvh">
+            <PetComponent PetCardModel="PetCardModel" />
         </MudStep>
-        <MudStep Style="height: 70dvh" @bind-Completed="completed">
-            <PreviewComponent />
+        <MudStep Style="height: 73dvh" @bind-Completed="completed">
+            <PreviewComponent PetCardModel="PetCardModel" />
         </MudStep>
     </ChildContent>
 
