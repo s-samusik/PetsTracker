@@ -5,6 +5,7 @@ public enum PetCardState
     Loading,
     Start,
     CodeNotFound,
+    PrivacyPolicy,
     Active,
     Registering,
     Registered

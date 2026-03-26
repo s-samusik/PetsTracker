@@ -23,6 +23,10 @@ else
             <ManualCodeEntryComponent Code="@Code" />
             break;
 
+        case PetCardState.PrivacyPolicy:
+            <PrivacyPolicyComponent OnAccept="HandleAcceptPrivacyPolicy"/>
+            break;
+
         case PetCardState.Registered:
             <CongratulationsComponent Code="@Code" />
             break;
@@ -32,8 +36,7 @@ else
             break;
 
         default:
-            <StartRegistrationComponent Code="@Code"
-                                        OnStart="HandleStartRegistration" />
+            <StartRegistrationComponent Code="@Code" OnStart="HandleStartRegistration" />
             break;
     }
 }

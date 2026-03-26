@@ -4,13 +4,13 @@ namespace PT.Blazor.Services;
 
 public sealed class PetCardStateMachine
 {
-    public PetCardState Current { get; private set; } = PetCardState.Start;
+    public PetCardState Current { get; private set; } = PetCardState.PrivacyPolicy;
 
     public bool CanRegister => Current == PetCardState.Start;
 
     public void Reset()
     {
-        Current = PetCardState.Start;
+        Current = PetCardState.PrivacyPolicy;
     }
 
     public void SetCodeNotFound()
@@ -21,6 +21,11 @@ public sealed class PetCardStateMachine
     public void SetActive()
     {
         Current = PetCardState.Active;
+    }
+
+    public void SetStart()
+    {
+        Current = PetCardState.Start;
     }
 
     public void SetRegistering()

@@ -1,0 +1,39 @@
+﻿<MudStack Spacing="2"
+          AlignItems="AlignItems.Center"
+          Class="pa-1"
+          Style="height: 100%; overflow-y: auto; overflow-x: hidden">
+    <MudIcon Class="mt-6"
+             Style="font-size: 2rem; color:#4CAF50"
+             Icon="@Icons.Material.Filled.Assignment"
+             Color="Color.Info" />
+
+    <MudText Typo="Typo.h6" Align="Align.Center">
+        Пользовательское соглашение 
+    </MudText>
+    <MudGrid Justify="Justify.Center">
+        <MudItem xs="12" sm="9">
+            <MudTextField                          
+                          Variant="Variant.Text"
+                          Style="border-color: aqua; height:70%"
+                          T="string"
+                          Text="@text"
+                          Lines="20"
+                          Sizing="InputSizing.Fixed"
+                          ReadOnly="true" />
+        </MudItem>
+    </MudGrid>
+    <MudSpacer />
+    <MudButton Variant="Variant.Outlined"
+               Style="color:#4CAF50; background-color:white; border-color:#4CAF50; flex-shrink:0"
+               FullWidth="true"
+               OnClick="GoToStart">
+        Принимаю
+    </MudButton>
+    <MudButton Variant="Variant.Text"
+               Style="color:#757575; flex-shrink:0"
+               FullWidth="true"
+               OnClick="GoHome">
+        На главную
+    </MudButton>
+</MudStack>
+

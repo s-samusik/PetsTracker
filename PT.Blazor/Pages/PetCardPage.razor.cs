@@ -59,4 +59,9 @@ public partial class PetCardPage : ComponentBase
     {
         State.SetRegistered();
     }
+
+    private void HandleAcceptPrivacyPolicy()
+    {
+        State.SetStart();
+    }
 }
