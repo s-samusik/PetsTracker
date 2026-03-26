@@ -1,25 +1,26 @@
 ﻿<MudStepper @bind-ActiveIndex="index"
-            CompletedStepColor="Color.Success"
-            CenterLabels="true"
-            CurrentStepColor="Color.Primary">
-
+            CompletedStepColor="Color.Success" CurrentStepColor="Color.Info"
+            StepClass="pt-4"
+            Style="height: 100%; overflow-y: auto; overflow-x: hidden">
     <ChildContent>
-        <MudStep Style="height: 73dvh">
+        <MudStep Style="height: auto; min-height:73dvh">
             <OwnerComponent PetCardModel="PetCardModel" />
         </MudStep>
-        <MudStep Style="height: 73dvh">
+        <MudStep Style="height: auto; min-height:73dvh">
             <PetComponent PetCardModel="PetCardModel" />
         </MudStep>
-        <MudStep Style="height: 73dvh" @bind-Completed="completed">
+        <MudStep Style="height: auto; min-height:73dvh" @bind-Completed="completed">
             <PreviewComponent PetCardModel="PetCardModel" />
         </MudStep>
     </ChildContent>
 
     <ActionContent Context="stepper">
         <MudButton Variant="Variant.Text"
+                   Style="color:#4CAF50; flex-shrink:0"
                    OnClick="@(() => stepper.PreviousStepAsync())"
                    StartIcon="@Icons.Material.Filled.ArrowBackIos"
                    Disabled="@(index < 1)">
+                   Назад
         </MudButton>
 
         <MudSpacer />
@@ -27,15 +28,16 @@
         @if (index == 2)
         {
             <MudButton Variant="Variant.Outlined"
-                       Color="Color.Success"
+                       Style="background-color:#4CAF50; color:white; border-color:#4CAF50; flex-shrink:0"
                        OnClick="@OnRegisterClick"
                        EndIcon="@Icons.Material.Filled.Check">
-                Зарегистрировать
+                Все верно
             </MudButton>
         }
         else
         {
             <MudButton Variant="Variant.Text"
+                       Style="color:#4CAF50; flex-shrink:0"
                        OnClick="@(() => stepper.NextStepAsync())"
                        EndIcon="@Icons.Material.Filled.ArrowForwardIos">
                 Дальше

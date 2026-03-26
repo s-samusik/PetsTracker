@@ -8,10 +8,10 @@
 }
 else
 {
-    <MudStack Spacing="2" Class="pa-2">
+    <MudStack Spacing="2" Class="pa-2" Style="height: 100%; overflow-y: auto; overflow-x: hidden">
         <MudGrid Class="mt-2">
             <MudItem xs="12" sm="5" Class="d-flex justify-center">
-                <MudAvatar Style="height:120px; width:120px; background-color:#f0f0f0">
+                <MudAvatar Style="height:150px; width:150px; background-color:#f0f0f0">
                     @if (PetCard.PhotoUrl is null)
                     {
                         <MudIcon Icon="@Icons.Material.Filled.Pets"
@@ -25,25 +25,29 @@ else
                 </MudAvatar>
             </MudItem>
             <MudItem xs="12" sm="7" Class="m-4 d-flex flex-column align-center align-sm-start">
-                <MudText Typo="Typo.h5">Привет!</MudText>
-                <MudText Typo="Typo.h5">Меня зовут @PetCard!.PetName</MudText>
-                <MudText Typo="Typo.h6">Кажется, я потерялся</MudText>
+                <MudText Align="Align.Center" Typo="Typo.h6">Привет!<br />Меня зовут @PetCard!.PetName</MudText>
+                <MudText Class="mt-3" Align="Align.Center" Typo="Typo.body1">Брест, ул Суворова 21</MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2">(мопс, дружелюбный, 8 лет, нужен специальный корм)</MudText>
             </MudItem>
         </MudGrid>
 
-        <MudGrid Justify="Justify.Center" Class="mt-4">
+        <MudGrid Justify="Justify.Center">
             <MudItem xs="12">
+                <MudText Typo="Typo.body2" Align="Align.Center">
+                    Пожалуйста, сообщите владельцу,<br />
+                    что я нашелся.<br />
+                    Контакты для связи ниже
+                </MudText>
                 <MudText Typo="Typo.body1" Align="Align.Center">
-                    Пожалуйста, сообщите моему хозяину обо мне.<br />
-                    Выберите любой, удобный вам, способ связи ниже. Спасибо!
+                    Спасибо!
                 </MudText>
                 <MudIcon Icon="@Icons.Material.Filled.Favorite"
                          Color="Color.Secondary"
                          Size="Size.Large"
                          Class="d-flex mx-auto mt-2" />
             </MudItem>
-            <MudItem xs="12" Class="mt-2 mb-4 d-flex justify-center">
-                <MudIconButton Icon="@Icons.Material.Filled.Phone" Color="Color.Tertiary" />
+            <MudItem xs="12" Class="mt-2 d-flex justify-center">
+                <MudIconButton Icon="@Icons.Material.Filled.Phone" Color="Color.Dark" />
 
                 @foreach (var link in PetCard.SocialLinks)
                 {
