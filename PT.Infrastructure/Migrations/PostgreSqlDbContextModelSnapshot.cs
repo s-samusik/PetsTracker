@@ -66,11 +66,17 @@ namespace PT.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("Address")
+                        .HasColumnType("text");
+
                     b.Property<Guid>("CodeEntityId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Info")
+                        .HasColumnType("text");
 
                     b.Property<string>("PetName")
                         .HasMaxLength(64)

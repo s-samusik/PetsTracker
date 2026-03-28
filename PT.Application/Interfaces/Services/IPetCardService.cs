@@ -10,4 +10,5 @@ public interface IPetCardService
     Task <PetCard> RegisterAsync(RegisterPetCardDto dto,  CancellationToken ct = default);
     Task<IReadOnlyList<PetCard>> GetAllByUserAsync(Guid userId, CancellationToken ct = default);
     Task<IReadOnlyList<PetCard>> GetAllByStateAsync(CardState state, CancellationToken ct = default);
+    Task<string> UploadAvatarAsync(Guid cardId, Stream file, string contentType, CancellationToken ct = default);
 }

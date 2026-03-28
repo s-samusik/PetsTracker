@@ -1,0 +1,39 @@
+﻿<MudStack Spacing="2"
+          AlignItems="AlignItems.Center"
+          Class="pa-1"
+          Style="height: 100%; overflow-y: auto; overflow-x: hidden">
+    <MudIcon Class="mt-6"
+             Style="font-size: 6rem; color:#4CAF50"
+             Icon="@Icons.Material.Filled.Pets"
+             Color="Color.Inherit" />
+
+    <MudText Typo="Typo.h5" Align="Align.Center" Class="mt-4" Style="color:#4CAF50">
+        Привет!
+    </MudText>
+    <MudText Typo="Typo.body2" Align="Align.Center" Class="mt-4" Style="color:#4CAF50">
+        Давайте создадим профиль<br />
+        для вашего любимца.<br /><br />
+        Это поможет ему быстрее вернуться домой,<br />
+        если он вдруг потеряется.<br />
+        Это займет всего пару минут. Начнем?
+    </MudText>
+    <MudText Typo="Typo.body2" Align="Align.Center" Class="mt-6" Style="color:#4CAF50">
+        (если возникли вопросы,<br />
+        вы всегда можете перейти На Главную<br />
+        и найти там ответы)
+    </MudText>
+    <MudSpacer />
+
+    <MudButton Variant="Variant.Outlined"
+               Style="background-color:#4CAF50; color:white; border-color:#4CAF50; flex-shrink:0"
+               FullWidth="true"
+               OnClick="GoToRegister">
+        Начнем
+    </MudButton>
+    <MudButton Variant="Variant.Text"
+               Style="color:#757575; flex-shrink:0"
+               FullWidth="true"
+               OnClick="GoHome">
+        На главную
+    </MudButton>
+</MudStack>

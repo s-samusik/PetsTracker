@@ -7,6 +7,8 @@ public sealed record PetCardResponse(
     string Code,
     string? PetName,
     string? PhotoUrl,
+    string? Address,
+    string? Info,
     CardState State,
     List<SocialLinkResponse> SocialLinks
 );

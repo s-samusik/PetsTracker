@@ -1,0 +1,46 @@
+﻿<MudStack Spacing="2"
+          AlignItems="AlignItems.Center"
+          Class="pa-1"
+          Style="height: 100%; overflow-y: auto; overflow-x: hidden">
+    <MudIcon Class="mt-6"
+             Style="font-size: 6rem;"
+             Icon="@Icons.Material.Filled.ErrorOutline"
+             Color="Color.Error" />
+
+    <MudText Typo="Typo.h6" Align="Align.Center" Class="mt-4">
+        К сожалению QR код не распознан
+    </MudText>
+    <MudText Typo="Typo.body1" Align="Align.Center" Class="mt-4 mb-8">
+        Ничего страшного.<br />
+        Пожалуйста, отсканируйте код снова<br />
+        или введите вручную ниже<br />
+        и нажмите продолжить
+    </MudText>
+
+    <MudGrid Justify="Justify.Center">
+        <MudItem xs="6" sm="4">
+            <MudTextField @bind-Value="manualCode"
+                          Variant="Variant.Text"
+                          Margin="Margin.Dense"
+                          T="string"
+                          Typo="Typo.h6"
+                          HelperText="формат: AA-11-AAA"
+                          Mask="@QrCodeMask" />
+        </MudItem>
+    </MudGrid>
+
+    <MudSpacer />
+
+    <MudButton Variant="Variant.Outlined"
+               Style="color:#4CAF50; background-color:white; border-color:#4CAF50; flex-shrink:0"
+               FullWidth="true"
+               OnClick="GoToRegistration">
+        Продолжить
+    </MudButton>
+    <MudButton Variant="Variant.Text"
+               Style="color:#757575; flex-shrink:0"
+               FullWidth="true"
+               OnClick="GoHome">
+        На главную
+    </MudButton>
+</MudStack>

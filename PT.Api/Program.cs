@@ -22,6 +22,8 @@ builder.Services.AddFormats();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 builder.Services.AddValidarors();
+builder.Services.AddImageProcessing();
+builder.Services.AddAwsStorage(builder.Configuration);
 
 var app = builder.Build();
 

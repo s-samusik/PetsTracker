@@ -1,0 +1,74 @@
+﻿@if (PetCard is null)
+{
+    <div class="d-flex justify-center align-center" style="height: 80vh;">
+        <MudProgressCircular Color="Color.Primary"
+                             Style="height:50px; width:50px;"
+                             Indeterminate="true" />
+    </div>
+}
+else
+{
+    <MudStack Spacing="2" Class="pa-2" Style="height: 100%; overflow-y: auto; overflow-x: hidden">
+        <MudGrid Class="mt-2">
+            <MudItem xs="12" sm="5" Class="d-flex justify-center">
+                <MudAvatar Style="height:150px; width:150px; background-color:#f0f0f0">
+                    @if (PetCard.PhotoUrl is null)
+                    {
+                        <MudIcon Icon="@Icons.Material.Filled.Pets"
+                                 Style="font-size: 6rem;"
+                                 Color="Color.Tertiary" />
+                    }
+                    else
+                    {
+                        <MudImage Src="@PetCard.PhotoUrl"></MudImage>
+                    }
+                </MudAvatar>
+            </MudItem>
+            <MudItem xs="12" sm="7" Class="m-4 d-flex flex-column align-center align-sm-start">
+                <MudText Align="Align.Center" Typo="Typo.h6">Привет!<br />Меня зовут @PetCard!.PetName</MudText>
+                <MudText Class="mt-3" Align="Align.Center" Typo="Typo.body1">Брест, ул Суворова 21</MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2">(мопс, дружелюбный, 8 лет, нужен специальный корм)</MudText>
+            </MudItem>
+        </MudGrid>
+
+        <MudGrid Justify="Justify.Center">
+            <MudItem xs="12">
+                <MudText Typo="Typo.body2" Align="Align.Center">
+                    Пожалуйста, сообщите владельцу,<br />
+                    что я нашелся.<br />
+                    Контакты для связи ниже
+                </MudText>
+                <MudText Typo="Typo.body1" Align="Align.Center">
+                    Спасибо!
+                </MudText>
+                <MudIcon Icon="@Icons.Material.Filled.Favorite"
+                         Color="Color.Secondary"
+                         Size="Size.Large"
+                         Class="d-flex mx-auto mt-2" />
+            </MudItem>
+            <MudItem xs="12" Class="mt-2 d-flex justify-center">
+                <MudIconButton Icon="@Icons.Material.Filled.Phone" Color="Color.Dark" />
+
+                @foreach (var link in PetCard.SocialLinks)
+                {
+                    var data = socialMap[link.Type];
+
+                    <MudIconButton Icon="@data.Icon"
+                                   Color="Color.Info"
+                                   OnClick="@(() => OpenSocial(link))"
+                                   Class="mx-2" />
+                }
+            </MudItem>
+
+            @if (!string.IsNullOrWhiteSpace(PetCard.Address))
+            {
+                <MudItem xs="12" Class="d-flex justify-center">
+                    <MudText Typo="Typo.body1">
+                        Возможно, мой дом недалеко, я живу по адресу:<br />
+                        @PetCard.Address
+                    </MudText>
+                </MudItem>
+            }
+        </MudGrid>
+    </MudStack>
+}

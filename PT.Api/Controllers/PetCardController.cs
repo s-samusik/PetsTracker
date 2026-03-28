@@ -20,10 +20,12 @@ public class PetCardController(IPetCardService petCardService) : ControllerBase
 
         var response = new PetCardResponse
         (
-            card.Id,
+            card!.Id,
             code,
             card.PetName,
             card.PhotoUrl,
+            card.Address,
+            card.Info,
             card.State,
             [.. card.SocialLinks.Select(x => new SocialLinkResponse(x.Type, x.Username))]
         );
@@ -36,7 +38,7 @@ public class PetCardController(IPetCardService petCardService) : ControllerBase
     public async Task<IActionResult> RegisterAsync(PetCardRegisterRequest request, CancellationToken ct = default)
     {
         var dto = new RegisterPetCardDto
-            (request.Code, request.PhoneNumber, request.PetName, request.SocialLinks);
+            (request.Code, request.PhoneNumber, request.PetName, request.Address, request.Info, request.SocialLinks);
 
         var card = await _petCardService.RegisterAsync(dto, ct);
 
@@ -46,10 +48,35 @@ public class PetCardController(IPetCardService petCardService) : ControllerBase
             request.Code,
             card.PetName,
             card.PhotoUrl,
+            card.Address,
+            card.Info,
             card.State,
             [.. card.SocialLinks.Select(x => new SocialLinkResponse(x.Type, x.Username))]
         );
 
         return Created(string.Empty, response);
     }
+
+    [HttpPost("{cardId:guid}/avatar")]
+    [RequestSizeLimit(10_000_000)] // 10 MB
+    public async Task<IActionResult> UploadAvatarAsync(
+        Guid cardId,
+        IFormFile file,
+        CancellationToken ct = default)
+    {
+        if (file is null || file.Length == 0)
+            return BadRequest("File is required");
+
+        await using var stream = file.OpenReadStream();
+
+        var url = await _petCardService.UploadAvatarAsync(
+            cardId,
+            stream,
+            file.ContentType,
+            ct
+        );
+
+        return Ok(new { Url = url });
+    }
+
 }

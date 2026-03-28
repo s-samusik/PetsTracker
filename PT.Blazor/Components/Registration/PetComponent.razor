@@ -1,0 +1,67 @@
+﻿<MudStack Spacing="2"
+          AlignItems="AlignItems.Center"
+          Class="pa-2"
+          Style="height: 100%; display:flex; flex-direction:column;">
+    <MudGrid>
+        <MudItem xs="12" Class="d-flex justify-center">
+            @if (!string.IsNullOrWhiteSpace(PetCardModel.AvatarPreview))
+            {
+                <MudAvatar Style="height:120px; width:120px; background-color:#f0f0f0">
+                    <MudImage Src="@PetCardModel.AvatarPreview"
+                              Style="height:100%; width:100%; object-fit:cover;" />
+                </MudAvatar>
+            }
+        </MudItem>
+        <MudItem xs="12" Class="d-flex justify-center">
+            <MudFileUpload @bind-Files="PetCardModel.Avatar"
+                           OnFilesChanged="@SwapPicture"
+                           Accept="image/*"
+                           MaxFiles="1"
+                           Clearable="true">
+                <CustomContent>
+                    <MudFab Style="color:#4CAF50"
+                            Size="Size.Large"
+                            StartIcon="@Icons.Material.Filled.PhotoCamera"
+                            OnClick="@context.OpenFilePickerAsync"
+                            Label="Фото питомца" />
+                </CustomContent>
+                <SelectedTemplate />
+            </MudFileUpload>
+        </MudItem>
+    </MudGrid>
+    <MudGrid Justify="Justify.Center" Class="mt-4">
+        <MudItem xs="12" sm="9">
+            <MudTextField @bind-Value="PetCardModel.PetName"
+                          Label="кличка"
+                          Counter="30"
+                          MaxLength="30"
+                          Immediate="true"
+                          Variant="Variant.Filled"
+                          T="string"
+                          Clearable />
+            <MudTextField 
+                          Placeholder="адрес проживания питомца"
+                          Counter="50"
+                          MaxLength="50"
+                          Immediate="true"
+                          Variant="Variant.Filled"
+                          T="string"
+                          Clearable />
+        </MudItem>
+    </MudGrid>
+
+    <MudGrid Justify="Justify.Center">
+        <MudItem xs="12" sm="9">
+            <MudTextField @bind-Value="PetCardModel.Address"
+                          Placeholder="особые приметы, характер, здоровье, вознаграждение и т.п."
+                          Counter="150"
+                          MaxLength="150"
+                          Lines="3"
+                          Sizing="InputSizing.Fixed"
+                          Immediate="true"
+                          Variant="Variant.Filled"
+                          T="string"
+                          Clearable />
+        </MudItem>
+    </MudGrid>
+</MudStack>

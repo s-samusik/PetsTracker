@@ -1,0 +1,17 @@
+﻿@inject IJSRuntime JS
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var existing = await JS.InvokeAsync<string>("locale.get");
+            if (!string.IsNullOrWhiteSpace(existing))
+                return;
+
+            var detected = await JS.InvokeAsync<string>("locale.detect");
+
+            await JS.InvokeVoidAsync("locale.set", detected);
+        }
+    }
+}
