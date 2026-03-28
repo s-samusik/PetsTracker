@@ -15,6 +15,7 @@ public class PetCardConfiguration : IEntityTypeConfiguration<PetCardEntity>
         builder.Property(x => x.PetName).HasMaxLength(64);
         builder.Property(x => x.PhotoUrl);
         builder.Property(x => x.Address);
+        builder.Property(x => x.Info);
 
         builder.Property(x => x.State)
             .HasConversion<string>();

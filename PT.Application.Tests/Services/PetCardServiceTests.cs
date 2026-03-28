@@ -61,7 +61,7 @@ public class PetCardServiceTests
     [Fact]
     public async Task GetByCodeAsync_ReturnsFromRepo()
     {
-        var card = PetCard.Register(User.Create("123"), Code.Generate("C"), "Barsik", "Brest", []);
+        var card = PetCard.Register(User.Create("123"), Code.Generate("C"), "Barsik", "Brest", "Some test info", []);
         _cards.Setup(r => r.GetByCodeAsync("C", default))
               .ReturnsAsync(card);
 
@@ -80,6 +80,7 @@ public class PetCardServiceTests
             Code: "CODE1",
             PetName: "Barsik",
             Address: "Brest",
+            Info: "Some test info",
             PhoneNumber: "+375291234567",
             SocialLinks: []
         );
@@ -112,6 +113,7 @@ public class PetCardServiceTests
             Code: "CODE1",
             PetName: "Barsik",
             Address: "Brest",
+            Info: "Some test info",
             PhoneNumber: "+375291234567",
             SocialLinks: []
         );

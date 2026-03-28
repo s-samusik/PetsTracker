@@ -5,6 +5,7 @@ public sealed record RegisterPetCardDto(
     string PhoneNumber,
     string PetName,
     string Address,
+    string Info,
     List<SocialLinkDto> SocialLinks
 );
 

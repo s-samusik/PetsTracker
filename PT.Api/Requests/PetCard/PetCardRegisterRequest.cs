@@ -3,4 +3,4 @@
 namespace PT.Api.Requests.PetCard;
 
 public sealed record PetCardRegisterRequest
-    (string Code, string PhoneNumber, string PetName, string Address, List<SocialLinkDto> SocialLinks);
+    (string Code, string PhoneNumber, string PetName, string Address, string Info, List<SocialLinkDto> SocialLinks);
