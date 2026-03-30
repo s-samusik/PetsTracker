@@ -8,24 +8,19 @@ public partial class OwnerComponent
 {
     [Parameter] public PetCardModel PetCardModel { get; set; } = default!;
 
-    private void OnSelectedSocialsChanged(IEnumerable<string> values)
-    {
-        PetCardModel.SelectedSocials = [.. values];
+    private readonly string[] Socials = { "Instagram", "Telegram", "Viber", "TikTok" };
 
-        foreach (var v in PetCardModel.SelectedSocials)
+    protected override void OnInitialized()
+    {
+        // гарантируем, что в модели есть ключи
+        foreach (var s in Socials)
         {
-            if (!PetCardModel.SocialLinks.ContainsKey(v))
+            if (!PetCardModel.SocialLinks.ContainsKey(s))
             {
-                PetCardModel.SocialLinks[v] = v == "Viber"
+                PetCardModel.SocialLinks[s] = s == "Viber"
                     ? DigitsOnly(PetCardModel.PhoneNumber)
                     : string.Empty;
             }
-        }
-
-        foreach (var key in PetCardModel.SocialLinks.Keys.ToList())
-        {
-            if (!PetCardModel.SelectedSocials.Contains(key))
-                PetCardModel.SocialLinks.Remove(key);
         }
     }
 
@@ -34,7 +29,7 @@ public partial class OwnerComponent
         if (string.IsNullOrWhiteSpace(input))
             return string.Empty;
 
-        return new string([.. input.Where(char.IsDigit)]);
+        return new string(input.Where(char.IsDigit).ToArray());
     }
 
     private static string GetSocialIcon(string social)

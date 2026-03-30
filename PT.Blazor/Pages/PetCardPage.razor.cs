@@ -12,7 +12,6 @@ public partial class PetCardPage : ComponentBase
 
     [Inject] private ICodeService CodeService { get; set; } = default!;
     [Inject] private PetCardStateMachine State { get; set; } = default!;
-    [Inject] private NavigationManager Nav {  get; set; } = default!;
 
     private PetCardModel PetCardModel = default!;
 

@@ -1,34 +1,62 @@
-﻿<MudStepper @bind-ActiveIndex="index"
-            CompletedStepColor="Color.Success" CurrentStepColor="Color.Info"
-            StepClass="pt-4"
-            Style="height: 100%; overflow-y: auto; overflow-x: hidden">
+﻿<MudStepper @bind-ActiveIndex="index">
+    <TitleTemplate />
+    <ConnectorTemplate Context="step">
+        <div class="mud-stepper-nav-connector" style="width:100%; height:2px; background-color:var(--color-primary-light)"/>
+    </ConnectorTemplate>
+    <LabelTemplate>
+        @if (context.IsActive)
+        {
+            <div style="display: flex; align-items: center; justify-content: center; height: 25px; width:25px; background-color:var(--color-light); border: solid 2px var(--color-primary-light);  border-radius: 50%;"/>
+        }
+        else if (context.Completed)
+        {
+            <div style="display: flex; align-items: center; justify-content: center; height: 25px; width:25px; background-color:var(--color-primary-light); border: solid 2px var(--color-primary-light); border-radius: 50%;">
+                <MudIcon Icon="@Icons.Material.Filled.Done" Color=Color.Inherit Style="color:var(--color-light)"></MudIcon>
+            </div>
+        }
+        else
+        {
+            <div style="height: 25px; width:25px; background-color:var(--color-light); border: solid 2px var(--color-primary-light); border-radius: 50%;"/>
+        }
+    </LabelTemplate>
     <ChildContent>
-        <MudStep Style="height: auto; min-height:73dvh">
+        <MudStep Style="min-height:80dvh">
             <OwnerComponent PetCardModel="PetCardModel" />
         </MudStep>
-        <MudStep Style="height: auto; min-height:73dvh">
+        <MudStep Style="min-height:80dvh">
             <PetComponent PetCardModel="PetCardModel" />
         </MudStep>
-        <MudStep Style="height: auto; min-height:73dvh" @bind-Completed="completed">
+        <MudStep Style="min-height:80dvh" @bind-Completed="completed">
             <PreviewComponent PetCardModel="PetCardModel" />
         </MudStep>
     </ChildContent>
-
     <ActionContent Context="stepper">
-        <MudButton Variant="Variant.Text"
-                   Style="color:#4CAF50; flex-shrink:0"
-                   OnClick="@(() => stepper.PreviousStepAsync())"
-                   StartIcon="@Icons.Material.Filled.ArrowBackIos"
-                   Disabled="@(index < 1)">
-                   Назад
-        </MudButton>
+        @if (index == 0)
+        {
+            <MudButton Variant="Variant.Text"
+                       Style="color:var(--color-secondary); flex-shrink: 0"
+                       OnClick="@(() => GoToStart())"
+                       StartIcon="@Icons.Material.Filled.ArrowBackIos">
+                Вернуться
+            </MudButton>
+        }
+        else
+        {
+            <MudButton Variant="Variant.Text"
+                       Style="color:var(--color-secondary); flex-shrink: 0"
+                       OnClick="@(() => stepper.PreviousStepAsync())"
+                       StartIcon="@Icons.Material.Filled.ArrowBackIos"
+                       Disabled="@(index < 1)">
+                Назад
+            </MudButton>
+        }
 
         <MudSpacer />
 
         @if (index == 2)
         {
-            <MudButton Variant="Variant.Outlined"
-                       Style="color:#4CAF50; background-color:white; border-color:#4CAF50; flex-shrink:0"
+            <MudButton Variant="Variant.Filled"
+                       Style="background-color:var(--color-primary-light); color:var(--color-light); flex-shrink:0 border-radius:25px;"
                        OnClick="@OnRegisterClick"
                        EndIcon="@Icons.Material.Filled.Check">
                 Все верно
@@ -36,8 +64,8 @@
         }
         else
         {
-            <MudButton Variant="Variant.Text"
-                       Style="color:#4CAF50; flex-shrink:0"
+            <MudButton Variant="Variant.Filled"
+                       Style="background-color:var(--color-primary-light); color:var(--color-light); flex-shrink:0; border-radius:25px;"
                        OnClick="@(() => stepper.NextStepAsync())"
                        EndIcon="@Icons.Material.Filled.ArrowForwardIos">
                 Дальше

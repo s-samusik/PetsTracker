@@ -8,6 +8,8 @@ public partial class RegistrationStepper : ComponentBase
     [Parameter] public PetCardModel PetCardModel { get; set; } = default!;
     [Parameter] public EventCallback OnFinish { get; set; } = default!;
 
+    [Inject] private NavigationManager Nav { get; set; } = default!;
+
     private int index;
     private bool completed;
 
@@ -15,5 +17,10 @@ public partial class RegistrationStepper : ComponentBase
     {
         completed = true;
         await OnFinish.InvokeAsync();
+    }
+
+    void GoToStart()
+    {
+        Nav.NavigateTo($"/card/{PetCardModel.Code}", forceLoad: true);
     }
 }

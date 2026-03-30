@@ -26,4 +26,10 @@ public partial class PetComponent
 
         PetCardModel.AvatarPreview = $"data:{PetCardModel.Avatar.ContentType};base64,{Convert.ToBase64String(fileBytes)}";
     }
+
+    private void RemoveAvatar()
+    {
+        PetCardModel.AvatarPreview = null;
+        PetCardModel.Avatar = null;
+    }
 }
