@@ -1,60 +1,43 @@
-﻿<MudStack Spacing="2"
-          AlignItems="AlignItems.Center"
-          Class="pa-1"
-          Style="height: auto; min-height:100%; overflow-y: auto; overflow-x: hidden">
+﻿<MudStack AlignItems="AlignItems.Center"
+          Style="min-height:100%">
 
     <MudGrid Justify="Justify.Center">
-        <MudItem xs="12" sm="9">
+        <MudItem xs="12" sm="9" Class="my-4">
             <MudTextField @bind-Value="PetCardModel.PhoneNumber"
                           Mask="@(new PatternMask("+000 (00) 000-00-00"))"
                           HelperText="формат: +375 (XX) XXX-XX-XX"
                           Variant="Variant.Text"
                           FullWidth
                           Required
-                          Label="ваш контактный номер"
+                          Immediate="true"
+                          Placeholder="ваш контактный номер"
                           RequiredError="обязательное поле"
-                          T="string"
-                          Clearable />
+                          InputMode="InputMode.numeric"
+                          Type="InputType.Tel"
+                          T="string" />
         </MudItem>
     </MudGrid>
 
     <MudGrid Justify="Justify.Center">
         <MudItem xs="12" sm="9">
-            <MudText Typo="Typo.body2" Align="Align.Center" Class="mt-4" Style="color:#4CAF50">
-                Также можно добавить соцсети.<br />
-                Так тому, кто найдет вашего питомца,<br />
-                будет проще с вами связаться<br />
-                (прислать вам фото или видео)
+            <MudText Typo="Typo.body2" Align="Align.Center" Class="mt-4" Style="color:var(--color-primary-dark)">
+                Укажите Ваши соцсети для связи.<br />
+                Так тому, кто найдет вашего питомца, будет проще с вами связаться<br />
+                (например, прислать фото или видео)
             </MudText>
         </MudItem>
         <MudItem xs="12" sm="9">
-            <MudSelect T="string"
-                       SelectedValues="PetCardModel.SelectedSocials"
-                       FullWidth
-                       Dense="true"
-                       Variant="Variant.Text"
-                       Placeholder="выберите соцсеть"
-                       SelectedValuesChanged="OnSelectedSocialsChanged"
-                       MultiSelection="true">
-                <MudSelectItem Value="@("Instagram")">Instagram</MudSelectItem>
-                <MudSelectItem Value="@("Telegram")">Telegram</MudSelectItem>
-                <MudSelectItem Value="@("Viber")">Viber</MudSelectItem>
-                <MudSelectItem Value="@("TikTok")">TikTok</MudSelectItem>
-            </MudSelect>
-            <br />
-            @foreach (var social in PetCardModel.SelectedSocials)
+            @foreach (var social in Socials)
             {
                 <MudTextField @bind-Value="PetCardModel.SocialLinks[social]"
                               Variant="Variant.Text"
                               FullWidth
-                              Counter="30"
-                              MaxLength="30"
                               Immediate="true"
-                              Margin="Margin.Dense"
                               Adornment="Adornment.Start"
-                              AdornmentColor="Color.Info"
+                              AdornmentColor="Color.Default"
                               AdornmentIcon="@GetSocialIcon(social)"
-                              Class="mb-1" />
+                              Placeholder="@social"
+                              Class="my-6" />
             }
         </MudItem>
     </MudGrid>
