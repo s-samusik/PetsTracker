@@ -51,7 +51,7 @@ public partial class PetCardPage : ComponentBase
 
     private void HandleStartRegistration()
     {
-        State.SetRegistering();
+        State.SetStart();
     }
 
     private void HandleFinishRegistration()
@@ -61,6 +61,6 @@ public partial class PetCardPage : ComponentBase
 
     private void HandleAcceptPrivacyPolicy()
     {
-        State.SetStart();
+        State.SetRegistering();
     }
 }
