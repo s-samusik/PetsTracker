@@ -49,13 +49,14 @@
                           Variant="Variant.Text"
                           T="string"
                            />
-            <MudTextField Placeholder="адрес проживания питомца"
+            <MudTextField @bind-Value="PetCardModel.Address"
+                          Placeholder="адрес проживания питомца"
                           Immediate="true"
                           Class="mb-10"
                           Variant="Variant.Text"
                           T="string"
                            />
-            <MudTextField @bind-Value="PetCardModel.Address"
+            <MudTextField @bind-Value="PetCardModel.Info"
                           Placeholder="особые приметы, характер, здоровье, вознаграждение и т.п."
                           Lines="3"
                           Class="mb-10"

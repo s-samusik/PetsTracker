@@ -18,6 +18,11 @@ public sealed class UserService
         return await _userRepository.ExistsAsync(phoneNumber, ct);
     }
 
+    public async Task<User?> GetByIdAsync(Guid userId, CancellationToken ct = default)
+    {
+        return await _userRepository.GetByIdAsync(userId, ct);
+    }
+
     public async Task<User?> GetByPhoneAsync(string number, CancellationToken ct = default)
     {
         var phoneNumber = _phoneNumberService.NormalizeAndValidate(number);

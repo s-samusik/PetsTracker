@@ -26,8 +26,7 @@ else
             </MudItem>
             <MudItem xs="12" sm="7" Class="m-4 d-flex flex-column align-center align-sm-start">
                 <MudText Align="Align.Center" Typo="Typo.h6">Привет!<br />Меня зовут @PetCard!.PetName</MudText>
-                <MudText Class="mt-3" Align="Align.Center" Typo="Typo.body1">Брест, ул Суворова 21</MudText>
-                <MudText Align="Align.Center" Typo="Typo.body2">(мопс, дружелюбный, 8 лет, нужен специальный корм)</MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2">@PetCard.Info</MudText>
             </MudItem>
         </MudGrid>
 
@@ -47,7 +46,7 @@ else
                          Class="d-flex mx-auto mt-2" />
             </MudItem>
             <MudItem xs="12" Class="mt-2 d-flex justify-center">
-                <MudIconButton Icon="@Icons.Material.Filled.Phone" Color="Color.Dark" />
+                <MudIconButton Icon="@Icons.Material.Filled.Phone" Color="Color.Dark" OnClick="@CallOwner" />
 
                 @foreach (var link in PetCard.SocialLinks)
                 {

@@ -24,6 +24,9 @@ public partial class PetComponent
         await stream.CopyToAsync(memoryStream);
         var fileBytes = memoryStream.ToArray();
 
+        PetCardModel.AvatarBytes = fileBytes;
+        PetCardModel.AvatarContentType = PetCardModel.Avatar.ContentType;
+
         PetCardModel.AvatarPreview = $"data:{PetCardModel.Avatar.ContentType};base64,{Convert.ToBase64String(fileBytes)}";
     }
 
