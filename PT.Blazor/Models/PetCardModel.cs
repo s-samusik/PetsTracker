@@ -5,13 +5,15 @@ namespace PT.Blazor.Models;
 public sealed class PetCardModel
 {
     public required string Code {  get; set; }
-    public string? PhoneNumber { get; set; }
+    public string PhoneNumber { get; set; } = null!;
     public string? PetName { get; set; }
     public string? Address { get; set; }
+    public string? Info { get; set; }
     public string? AvatarPreview { get; set; }
     public IBrowserFile? Avatar {  get; set; }
+    public byte[]? AvatarBytes { get; set; }
+    public string? AvatarContentType { get; set; }
 
     public Dictionary<string, string> SocialLinks = [];
-    public List<string> SelectedSocials { get; set; } = [];
 }
 

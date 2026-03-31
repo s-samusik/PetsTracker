@@ -12,7 +12,6 @@ public partial class OwnerComponent
 
     protected override void OnInitialized()
     {
-        // гарантируем, что в модели есть ключи
         foreach (var s in Socials)
         {
             if (!PetCardModel.SocialLinks.ContainsKey(s))
