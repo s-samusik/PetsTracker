@@ -78,6 +78,6 @@ public partial class RegistrationStepper : ComponentBase
 
     void GoToStart()
     {
-        Nav.NavigateTo($"/card/{PetCardModel.Code}", forceLoad: true);
+        Nav.NavigateTo($"/", forceLoad: true);
     }
 }

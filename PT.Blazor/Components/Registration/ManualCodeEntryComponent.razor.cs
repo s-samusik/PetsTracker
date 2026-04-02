@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using MudBlazor;
 
 namespace PT.Blazor.Components.Registration;
@@ -9,22 +10,11 @@ public partial class ManualCodeEntryComponent
 
     [Inject] private NavigationManager Nav { get; set; } = default!;
 
-    public PatternMask QrCodeMask = new("AA-11-AAA")
-    {
-        MaskChars = [new MaskChar('A', @"[a-zA-Z]"), new MaskChar('1', @"[1-9]")],
-        Placeholder = ' ',
-        CleanDelimiters = true,
-        Transformation = AllUpperCase
-    };
-
     private string manualCode = null!;
 
     private void GoToRegistration()
-        => Nav.NavigateTo($"/card/{manualCode}", forceLoad: true);
+        => Nav.NavigateTo($"/card/{manualCode.ToUpper()}", forceLoad: true);
 
     private void GoHome()
         => Nav.NavigateTo("/", forceLoad: true);
-
-    private static char AllUpperCase(char c) 
-        => c.ToString().ToUpperInvariant()[0];
 }
