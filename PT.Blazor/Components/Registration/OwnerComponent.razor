@@ -4,13 +4,14 @@
     <MudGrid Justify="Justify.Center">
         <MudItem xs="12" sm="9" Class="my-4">
             <MudTextField @bind-Value="PetCardModel.PhoneNumber"
-                          HelperText="формат: +375(XX)XXX-XX-XX"
+                          HelperText="формат: 375 XX XXX XX XX или 80XX XXX XX XX"
                           Variant="Variant.Text"
                           FullWidth
                           Required
+                          MaxLength="20"
                           Immediate="true"
                           Placeholder="ваш контактный номер"
-                          RequiredError="обязательное поле"
+                          RequiredError="это обязательное поле"
                           InputMode="InputMode.numeric"
                           Type="InputType.Tel"
                           T="string" />
