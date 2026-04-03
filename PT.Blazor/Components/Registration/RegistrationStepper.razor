@@ -87,6 +87,7 @@
                 <MudButton Variant="Variant.Filled"
                            Style="background-color:var(--color-primary-light); color:var(--color-light); flex-shrink:0; border-radius:25px;"
                            OnClick="@(() => stepper.NextStepAsync())"
+                           Disabled="!CanGoNext"
                            EndIcon="@Icons.Material.Filled.ArrowForwardIos">
                     Дальше
                 </MudButton>

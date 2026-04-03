@@ -14,6 +14,8 @@ public partial class RegistrationStepper : ComponentBase
     [Inject] private NavigationManager Nav { get; set; } = default!;
     [Inject] private IPetCardService PetCardService { get; set; } = default!;
 
+    private bool ownerValid = true;
+    private bool petValid = true;
     private int index;
     private bool completed;
     private bool loading;
@@ -76,8 +78,17 @@ public partial class RegistrationStepper : ComponentBase
         await OnFinish.InvokeAsync();
     }
 
-    void GoToStart()
+    private void GoToStart()
     {
         Nav.NavigateTo($"/", forceLoad: true);
     }
+
+    private bool CanGoNext =>
+        index switch
+        {
+            0 => ownerValid,
+            1 => petValid,
+            2 => true,
+            _ => false
+        };
 }
