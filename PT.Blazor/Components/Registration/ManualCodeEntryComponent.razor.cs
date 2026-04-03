@@ -13,8 +13,11 @@ public partial class ManualCodeEntryComponent
     private string manualCode = null!;
 
     private void GoToRegistration()
-        => Nav.NavigateTo($"/card/{manualCode.ToUpper()}", forceLoad: true);
+        => Nav.NavigateTo($"/card/{FormattedCode(manualCode)}", forceLoad: true);
 
     private void GoHome()
         => Nav.NavigateTo("/", forceLoad: true);
+
+    private string FormattedCode(string code)
+        => code.Replace(" ", string.Empty).ToUpper();
 }
