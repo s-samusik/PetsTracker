@@ -14,7 +14,7 @@ public partial class RegistrationStepper : ComponentBase
     [Inject] private NavigationManager Nav { get; set; } = default!;
     [Inject] private IPetCardService PetCardService { get; set; } = default!;
 
-    private bool ownerValid = true;
+    private bool ownerValid = default;
     private bool petValid = true;
     private int index;
     private bool completed;
@@ -32,11 +32,11 @@ public partial class RegistrationStepper : ComponentBase
 
         var dto = new RegisterPetCardDto(
             Code: PetCardModel.Code,
-            PhoneNumber: PetCardModel.PhoneNumber,
+            PhoneNumber: "375" + PetCardModel.PhoneNumber,
             PetName: PetCardModel.PetName,
             Address: PetCardModel.Address,
             Info: PetCardModel.Info,
-            SocialLinks: socialLinks
+            SocialLinks: socialLinks!
         );
 
         Guid petCardId;
@@ -81,6 +81,12 @@ public partial class RegistrationStepper : ComponentBase
     private void GoToStart()
     {
         Nav.NavigateTo($"/", forceLoad: true);
+    }
+
+    private void HandleOwnerValidChanged(bool valid)
+    {
+        ownerValid = valid;
+        StateHasChanged();
     }
 
     private bool CanGoNext =>

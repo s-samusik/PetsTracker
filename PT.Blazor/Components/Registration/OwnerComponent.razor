@@ -2,7 +2,7 @@
           Style="min-height:100%">
 
     <MudGrid Justify="Justify.Center">
-        <MudItem xs="12" sm="9" Class="my-4">
+        <MudItem xs="8" sm="6" Class="my-4">
             <MudTextField @bind-Value="PetCardModel.PhoneNumber"
                           HelperText="формат: +375 XX XXX XX XX"
                           Variant="Variant.Text"
@@ -10,6 +10,7 @@
                           Required
                           MaxLength="12"
                           Immediate="true"
+                          TextChanged="@HandleTextChanged"
                           Adornment="Adornment.Start"
                           AdornmentText="+375"
                           RequiredError="это обязательное поле"
@@ -21,7 +22,7 @@
     <MudGrid Justify="Justify.Center">
         <MudItem xs="12" sm="9">
             <MudText Typo="Typo.body2" Align="Align.Center" Class="mt-4" Style="color:var(--color-primary-dark)">
-                Укажите Ваши соцсети для связи.<br />
+                Укажите также Ваши соцсети для связи.<br />
                 Так тому, кто найдет вашего питомца, будет проще с вами связаться<br />
                 (например, прислать фото или видео)
             </MudText>
@@ -29,14 +30,16 @@
         <MudItem xs="12" sm="9">
             @foreach (var social in Socials)
             {
-                <MudTextField @bind-Value="PetCardModel.SocialLinks[social]"
+                <MudTextField @bind-Value="PetCardModel.SocialLinks[social.ToString()]"
                               Variant="Variant.Text"
                               FullWidth
                               Immediate="true"
+                              HelperText="@GetHelperText(social)"
+                              HelperTextOnFocus="true"
                               Adornment="Adornment.Start"
                               AdornmentColor="Color.Default"
                               AdornmentIcon="@GetSocialIcon(social)"
-                              Placeholder="@social"
+                              Placeholder="@social.ToString()"
                               Class="my-6" />
             }
         </MudItem>
