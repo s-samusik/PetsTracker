@@ -11,22 +11,37 @@ public sealed class BelarusPhoneNumberValidator : PhoneNumberValidatorBase
         return digits.StartsWith("+375") || digits.StartsWith("375") || digits.StartsWith("80");
     }
 
-    public override string NormalizeAndValidate(string phone)
+    private static string Normalize(string phone)
     {
         var digits = ExtractDigits(phone);
 
-        if (digits.StartsWith("80"))
+        return digits switch
         {
-            digits = "+375" + digits[2..];
-        }
+            // 80XXXXXXXXX → +375XXXXXXXXX
+            var d when d.StartsWith("80") => "+375" + d[2..],
 
-        if (digits.StartsWith("375"))
-        {
-            digits = "+" + digits;
-        }
+            // 375XXXXXXXXX → +375XXXXXXXXX
+            var d when d.StartsWith("375") => "+" + d,
 
-        return PhoneRegexes.BelarusMobileNumber.IsMatch(digits)
-            ? digits
+            var d when d.StartsWith("+375") => d,
+
+            _ => digits
+        };
+    }
+
+    public override bool IsValid(string phone)
+    {
+        var normalized = Normalize(phone);
+        
+        return PhoneRegexes.BelarusMobileNumber.IsMatch(normalized);
+    }
+
+    public override string NormalizeAndValidate(string phone)
+    {
+        var normalized = Normalize(phone);
+
+        return PhoneRegexes.BelarusMobileNumber.IsMatch(normalized)
+            ? normalized
             : throw new InvalidOperationException($"Invalid Belarus mobile phone number: '{phone}'");
     }
 }

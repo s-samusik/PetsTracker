@@ -22,7 +22,7 @@ public partial class PetCardComponent
         {
             { SocialMediaType.Instagram, (Icon.Instagram, "https://instagram.com/{0}") },
             { SocialMediaType.Telegram,  (Icon.Telegram, "https://t.me/{0}") },
-            { SocialMediaType.TikTok,    (Icon.TikTok, "https://www.tiktok.com/@{0}") },
+            { SocialMediaType.TikTok,    (Icon.TikTok, "https://www.tiktok.com/{0}") },
             { SocialMediaType.Viber,     (Icon.Viber, "viber://add?number={0}")}
         };
 

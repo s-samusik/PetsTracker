@@ -12,4 +12,5 @@ public abstract class PhoneNumberValidatorBase : IPhoneNumberValidator
 
     public abstract bool CanValidate(string phone);
     public abstract string NormalizeAndValidate(string phone);
+    public abstract bool IsValid(string phone);
 }
