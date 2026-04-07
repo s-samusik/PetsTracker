@@ -1,24 +1,22 @@
 ﻿<MudStack AlignItems="AlignItems.Center"
           Class="pa-1"
-          Style="height: 100%;">
+          Style="height:100%; overflow-y:auto; overflow-x: hidden">
     <MudIcon Class="mt-3"
              Style="font-size: 2rem; color:var(--color-secondary)"
              Icon="@Icons.Material.Filled.Assignment"
              Color="Color.Inherit" />
 
     <MudText Typo="Typo.h6" Align="Align.Center">
-        Пользовательское соглашение 
+        Пользовательское соглашение
     </MudText>
 
     <MudGrid Justify="Justify.Center">
         <MudItem xs="12" sm="9">
-            <MudTextField                          
-                          Variant="Variant.Text"
-                          Style="height:65dvh"
+            <MudTextField Variant="Variant.Text"
+                          Style="max-height:65%"
                           T="string"
                           Text="@text"
                           Lines="23"
-                          Sizing="InputSizing.Fixed"
                           ReadOnly="true" />
         </MudItem>
     </MudGrid>

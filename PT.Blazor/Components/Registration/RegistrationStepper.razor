@@ -37,14 +37,22 @@
         }
         else
         {
-            <MudStep Style="min-height:80dvh">
-                <OwnerComponent PetCardModel="PetCardModel" OnOwnerValidChanged="HandleOwnerValidChanged" />
+            <MudStep>
+                <div style="height:80dvh; overflow-y:auto; padding-bottom:16px;">
+                    <OwnerComponent PetCardModel="PetCardModel" OnOwnerValidChanged="HandleOwnerValidChanged" />
+                </div>
             </MudStep>
-            <MudStep Style="min-height:80dvh">
-                <PetComponent PetCardModel="PetCardModel" />
+
+            <MudStep>
+                <div style="height:80dvh; overflow-y:auto; padding-bottom:16px;">
+                    <PetComponent PetCardModel="PetCardModel" />
+                </div>
             </MudStep>
-            <MudStep Style="min-height:80dvh" @bind-Completed="completed">
-                <PreviewComponent PetCardModel="PetCardModel" />
+
+            <MudStep @bind-Completed="completed">
+                <div style="height:80dvh; overflow-y:auto; padding-bottom:16px;">
+                    <PreviewComponent PetCardModel="PetCardModel" />
+                </div>
             </MudStep>
         }
     </ChildContent>
