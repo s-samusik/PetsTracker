@@ -38,6 +38,7 @@ public partial class OwnerComponent
         [SocialMediaType.Viber] = "номер телефона, только цифры: 375XXXXXXXXX",
     };
 
+    private string PhoneNumber = string.Empty;
     private bool isNumberValid = default;
 
     protected override void OnInitialized()
@@ -64,6 +65,8 @@ public partial class OwnerComponent
         var number = "375" + text.Replace(" ", string.Empty);
 
         isNumberValid = PhoneNumberService.IsValid(number);
+
+        PetCardModel.PhoneNumber = isNumberValid ? number : string.Empty;
 
         OnOwnerValidChanged.InvokeAsync(isNumberValid);
     }

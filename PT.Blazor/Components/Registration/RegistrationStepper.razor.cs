@@ -32,7 +32,7 @@ public partial class RegistrationStepper : ComponentBase
 
         var dto = new RegisterPetCardDto(
             Code: PetCardModel.Code,
-            PhoneNumber: "375" + PetCardModel.PhoneNumber,
+            PhoneNumber: PetCardModel.PhoneNumber,
             PetName: PetCardModel.PetName,
             Address: PetCardModel.Address,
             Info: PetCardModel.Info,

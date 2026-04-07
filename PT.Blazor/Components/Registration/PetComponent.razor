@@ -5,9 +5,9 @@
             <div style="position:relative; display:inline-block; height:120px; width:120px;">
                 @if (!string.IsNullOrWhiteSpace(PetCardModel.AvatarPreview))
                 {
-                    <MudAvatar Style="height:120px; width:120px; background-color:#f0f0f0">
-                        <MudImage Src="@PetCardModel.AvatarPreview"
-                                  Style="height:100%; width:100%; object-fit:cover;" />
+                    <MudAvatar Style="height:120px; width:120px; background-color:#f0f0f0; overflow:hidden; border-radius:50%; display:flex; align-items:center; justify-content:center;">
+                        <img src="@PetCardModel.AvatarPreview"
+                             style="width:100%; height:100%; object-fit:cover; object-position:center; " />
                     </MudAvatar>
 
                     <MudIconButton Icon="@Icons.Material.Filled.Close"
@@ -47,15 +47,13 @@
                           Class="mb-10"
                           Immediate="true"
                           Variant="Variant.Text"
-                          T="string"
-                           />
+                          T="string" />
             <MudTextField @bind-Value="PetCardModel.Address"
                           Placeholder="адрес проживания питомца"
                           Immediate="true"
                           Class="mb-10"
                           Variant="Variant.Text"
-                          T="string"
-                           />
+                          T="string" />
             <MudTextField @bind-Value="PetCardModel.Info"
                           Placeholder="Дополнительная информация о питомце (особые приметы, характер, здоровье, вознаграждение)"
                           Lines="3"

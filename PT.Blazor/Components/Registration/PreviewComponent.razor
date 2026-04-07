@@ -1,14 +1,59 @@
-﻿<MudStack AlignItems="AlignItems.Center"
-          Style="min-height: 100%; display:flex; flex-direction:column;">
+﻿<MudStack AlignItems="AlignItems.Center" Style="min-height:100%">
     <MudGrid Justify="Justify.Center">
         <MudItem xs="12" sm="9">
-            <MudText Typo="Typo.h6" Align="Align.Center" Style="color:var(--color-primary-dark)">
+
+            <MudText Typo="Typo.h6" Align="Align.Center" Class="mb-2"
+                     Style="color:var(--color-primary-dark)">
                 Почти готово!
             </MudText>
-            <MudText Typo="Typo.body2" Align="Align.Center" Class="mt-3" Style="color:var(--color-primary-dark)">
+
+            <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-4"
+                     Style="color:var(--color-primary-dark)">
                 Давайте проверим, все ли указано верно.<br />
                 Ведь именно эти данные помогут Вашему питомцу вернуться домой.
             </MudText>
+
+            @if (!string.IsNullOrWhiteSpace(PetCardModel.AvatarPreview))
+            {
+                <MudStack Justify="Justify.Center" AlignItems="AlignItems.Center" Class="mb-3">
+                    <MudAvatar Style="height:120px; width:120px; background-color:#f0f0f0; overflow:hidden; border-radius:50%; display:flex; align-items:center; justify-content:center;">
+                        <img src="@PetCardModel.AvatarPreview"
+                             style="width:100%; height:100%; object-fit:cover; object-position:center; " />
+                    </MudAvatar>
+                </MudStack>
+            }
+
+            @if (!string.IsNullOrWhiteSpace(PetCardModel.PetName))
+            {
+                <MudText Typo="Typo.body1" Class="my-2" Style="color:var(--color-secondary)">
+                    Кличка: <span style="color:var(--color-dark)">@PetCardModel.PetName</span>
+                </MudText>
+            }
+
+            @if (!string.IsNullOrWhiteSpace(PetCardModel.Address))
+            {
+                <MudText Typo="Typo.body1" Class="my-2" Style="color:var(--color-secondary)">
+                    Адрес: <span style="color:var(--color-dark)">@PetCardModel.Address</span>
+                </MudText>
+            }
+
+            @if (!string.IsNullOrWhiteSpace(PetCardModel.Info))
+            {
+                <MudText Typo="Typo.body1" Class="my-2" Style="color:var(--color-secondary)">
+                    Доп. информация: <span style="color:var(--color-dark)">@PetCardModel.Info</span>
+                </MudText>
+            }
+
+            <MudText Typo="Typo.body1" Class="my-2" Style="color:var(--color-secondary)">
+                Телефон для связи: <span style="color:var(--color-dark)">@PetCardModel.PhoneNumber</span>
+            </MudText>
+
+            @foreach (var link in PetCardModel.SocialLinks.Where(x => !string.IsNullOrWhiteSpace(x.Value)))
+            {
+                <MudText Typo="Typo.body1" Class="my-2" Style="color:var(--color-secondary)">
+                    @link.Key: <span style="color:var(--color-dark)">@link.Value</span>
+                </MudText>
+            }
         </MudItem>
     </MudGrid>
 </MudStack>
