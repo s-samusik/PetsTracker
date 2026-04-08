@@ -13,7 +13,13 @@
                 Ведь именно эти данные помогут Вашему питомцу вернуться домой.
             </MudText>
 
-            @if (!string.IsNullOrWhiteSpace(PetCardModel.AvatarPreview))
+            @if (string.IsNullOrWhiteSpace(PetCardModel.AvatarPreview))
+            {
+                <MudText Typo="Typo.body1" Class="my-2" Style="color:var(--color-secondary)">
+                    Фото: <span style="color:var(--color-dark)">Нет</span>
+                </MudText>
+            }
+            else
             {
                 <MudStack Justify="Justify.Center" AlignItems="AlignItems.Center" Class="mb-3">
                     <MudAvatar Style="height:120px; width:120px; background-color:#f0f0f0; overflow:hidden; border-radius:50%; display:flex; align-items:center; justify-content:center;">
@@ -26,7 +32,7 @@
             @if (!string.IsNullOrWhiteSpace(PetCardModel.PetName))
             {
                 <MudText Typo="Typo.body1" Class="my-2" Style="color:var(--color-secondary)">
-                    Кличка: <span style="color:var(--color-dark)">@PetCardModel.PetName</span>
+                    Питомец: <span style="color:var(--color-dark)">@PetCardModel.PetName</span>
                 </MudText>
             }
 
@@ -44,8 +50,8 @@
                 </MudText>
             }
 
-            <MudText Typo="Typo.body1" Class="my-2" Style="color:var(--color-secondary)">
-                Телефон для связи: <span style="color:var(--color-dark)">@PetCardModel.PhoneNumber</span>
+            <MudText Typo="Typo.body1" Class="mt-4 mb-2" Style="color:var(--color-secondary)">
+                Телефон для связи: <span style="color:var(--color-dark);">@PetCardModel.PhoneNumber</span>
             </MudText>
 
             @foreach (var link in PetCardModel.SocialLinks.Where(x => !string.IsNullOrWhiteSpace(x.Value)))
