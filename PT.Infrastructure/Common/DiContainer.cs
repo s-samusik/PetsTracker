@@ -25,5 +25,6 @@ public static class DiContainer
         services.TryAddScoped<ICodeRepository, CodeRepository>();
         services.TryAddScoped<IPetCardRepository, PetCardRepository>();
         services.TryAddScoped<IUserRepository, UserRepository>();
+        services.TryAddScoped<IPrivacyPolicyRepository, PrivacyPolicyRepository>();
     }
 }

@@ -10,19 +10,38 @@
         Пользовательское соглашение
     </MudText>
 
-    <MudGrid Justify="Justify.Center">
-        <MudItem xs="12" sm="9">
-            <MudTextField Variant="Variant.Text"
-                          Style="max-height:65%"
-                          T="string"
-                          Text="@text"
-                          Lines="23"
-                          ReadOnly="true" />
-        </MudItem>
-    </MudGrid>
+    @if (loading)
+    {
+        <MudSpacer />
+        <MudProgressCircular Color="Color.Success"
+                             Style="height:70px; width:70px;"
+                             Indeterminate="true" />
+
+        <MudText Typo="Typo.body2"
+                 Align="Align.Center"
+                 Class="mt-4"
+                 Style="color:var(--color-primary-dark)">
+            Загружаем данные, подождите немного..
+        </MudText>
+    }
+    else
+    {
+        <MudGrid Justify="Justify.Center">
+            <MudItem xs="12" sm="9">
+                <MudTextField Variant="Variant.Text"
+                              Style="max-height:65%"
+                              T="string"
+                              Text="@privacyPolicy"
+                              Lines="23"
+                              ReadOnly="true" />
+            </MudItem>
+        </MudGrid>
+    }
+
     <MudSpacer />
     <MudButton Variant="Variant.Filled"
                Style="width:90%; background-color:var(--color-primary-light); color:var(--color-light); flex-shrink:0; border-radius:25px;"
+               Disabled="@string.IsNullOrWhiteSpace(privacyPolicy)"
                OnClick="GoToStart">
         Принимаю
     </MudButton>
@@ -32,4 +51,3 @@
         На главную
     </MudButton>
 </MudStack>
-

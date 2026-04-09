@@ -25,6 +25,7 @@ public static class DiContainer
         services.TryAddScoped<ICodeService, CodeService>();
         services.TryAddScoped<IUserService, UserService>();
         services.TryAddScoped<IPetCardService, PetCardService>();
+        services.TryAddScoped<IPrivacyPolicyService, PrivacyPolicyService>();
     }
 
     public static void AddValidarors(this IServiceCollection services)

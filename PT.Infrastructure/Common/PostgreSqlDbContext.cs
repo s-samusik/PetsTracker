@@ -10,6 +10,7 @@ public class PostgreSqlDbContext(DbContextOptions<PostgreSqlDbContext> options)
     public DbSet<PetCardEntity> PetCards => Set<PetCardEntity>();
     public DbSet<CodeEntity> Codes => Set<CodeEntity>();
     public DbSet<SocialLinkEntity> SocialLinks => Set<SocialLinkEntity>();
+    public DbSet<PrivacyPolicyEntity> PrivacyPolicies => Set<PrivacyPolicyEntity>();
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
