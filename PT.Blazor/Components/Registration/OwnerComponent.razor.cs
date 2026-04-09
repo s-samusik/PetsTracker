@@ -43,6 +43,10 @@ public partial class OwnerComponent
 
     protected override void OnInitialized()
     {
+        PhoneNumber = PetCardModel.PhoneNumber?.Length > 4
+            ? PetCardModel.PhoneNumber[4..]
+            : string.Empty;
+
         foreach (var s in Socials)
         {
             var key = s.ToString();
@@ -62,7 +66,9 @@ public partial class OwnerComponent
 
     private void HandleTextChanged(string text)
     {
-        var number = "375" + text.Replace(" ", string.Empty);
+        var digits = new string([.. text.Where(char.IsDigit)]);
+
+        var number = "+375" + digits;
 
         isNumberValid = PhoneNumberService.IsValid(number);
 
