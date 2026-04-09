@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PT.Infrastructure.Common;
@@ -11,9 +12,11 @@ using PT.Infrastructure.Common;
 namespace PT.Infrastructure.Migrations
 {
     [DbContext(typeof(PostgreSqlDbContext))]
-    partial class PostgreSqlDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260409093252_AddPrivacyPolicy")]
+    partial class AddPrivacyPolicy
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,7 +105,7 @@ namespace PT.Infrastructure.Migrations
 
                     b.HasIndex("UserEntityId");
 
-                    b.ToTable("pet_cards", (string)null);
+                    b.ToTable("petcards", (string)null);
                 });
 
             modelBuilder.Entity("PT.Infrastructure.Entities.PrivacyPolicyEntity", b =>
@@ -164,7 +167,7 @@ namespace PT.Infrastructure.Migrations
                     b.HasIndex("PetCardEntityId", "Type")
                         .IsUnique();
 
-                    b.ToTable("social_links", (string)null);
+                    b.ToTable("sociallinks", (string)null);
                 });
 
             modelBuilder.Entity("PT.Infrastructure.Entities.UserEntity", b =>

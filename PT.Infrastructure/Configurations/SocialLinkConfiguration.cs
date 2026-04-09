@@ -8,7 +8,7 @@ public class SocialLinkConfiguration : IEntityTypeConfiguration<SocialLinkEntity
 {
     public void Configure(EntityTypeBuilder<SocialLinkEntity> builder)
     {
-        builder.ToTable("sociallinks");
+        builder.ToTable("social_links");
 
         builder.HasKey(x => x.Id);
 
