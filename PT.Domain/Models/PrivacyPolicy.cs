@@ -1,4 +1,6 @@
-﻿namespace PT.Domain.Models;
+﻿using PT.Domain.Enums;
+
+namespace PT.Domain.Models;
 
 public sealed class PrivacyPolicy
 {
@@ -6,4 +8,12 @@ public sealed class PrivacyPolicy
     public int Version { get; private set; }
     public string Value { get; private set; }
     public DateTimeOffset CreatedAt { get; private set; }
+
+    public PrivacyPolicy(Guid id, int version, string value, DateTimeOffset createdAt)
+    {
+        Id = id;
+        Version = version;
+        Value = value;
+        CreatedAt = createdAt;
+    }
 }
