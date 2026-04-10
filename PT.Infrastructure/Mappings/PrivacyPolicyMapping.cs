@@ -10,6 +10,7 @@ public static class PrivacyPolicyMapping
             id: entity.Id,
             value: entity.Value,
             version: entity.Version,
+            userType: entity.UserType,
             createdAt: entity.CreatedAt
         );
 
@@ -19,6 +20,7 @@ public static class PrivacyPolicyMapping
             Id = model.Id,
             Value = model.Value,
             Version = model.Version,
+            UserType = model.UserType,
             CreatedAt = model.CreatedAt,
         };
 }

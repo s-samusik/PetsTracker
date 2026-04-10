@@ -6,12 +6,27 @@ using PT.Domain.Models;
 namespace PT.Application.Services;
 
 internal sealed class PrivacyPolicyService
-    (IPrivacyPolicyRepository privacyPolicyRepository) : IPrivacyPolicyService
+    (IPrivacyPolicyRepository privacyPolicyRepository, IUnitOfWork uow) : IPrivacyPolicyService
 {
     private readonly IPrivacyPolicyRepository _privacyPolicyRepository = privacyPolicyRepository;
-    
-    public async Task<PrivacyPolicy?> GetPrivacyPolicyAsync(UserType userType, CancellationToken ct = default)
+    private readonly IUnitOfWork _uow = uow;
+
+    public async Task<PrivacyPolicy?> AddByUserTypeAsync(string text, UserType userType, CancellationToken ct = default)
     {
-        return await _privacyPolicyRepository.GetPrivacyPolicyAsync(userType, ct);
+        var latest = await GetLatestByUserTypeAsync(userType, ct);
+
+        var newVersion = (latest?.Version ?? 0) + 1;
+
+        var privacyPolicy = PrivacyPolicy.Create(newVersion, text, userType);
+
+        await _privacyPolicyRepository.AddAsync(privacyPolicy, ct);
+        await _uow.SaveChangesAsync(ct);
+
+        return privacyPolicy;
+    }
+
+    public async Task<PrivacyPolicy?> GetLatestByUserTypeAsync(UserType userType, CancellationToken ct = default)
+    {
+        return await _privacyPolicyRepository.GetLatestByUserTypeAsync(userType, ct);
     }
 }
