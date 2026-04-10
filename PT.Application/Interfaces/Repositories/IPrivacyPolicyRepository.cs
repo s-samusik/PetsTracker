@@ -5,5 +5,6 @@ namespace PT.Application.Interfaces.Repositories;
 
 public interface IPrivacyPolicyRepository
 {
-    Task<PrivacyPolicy?> GetPrivacyPolicyAsync(UserType userType, CancellationToken ct = default);
+    Task<PrivacyPolicy?> GetLatestByUserTypeAsync(UserType userType, CancellationToken ct = default);
+    Task AddAsync(PrivacyPolicy privacyPolicy, CancellationToken ct = default);
 }

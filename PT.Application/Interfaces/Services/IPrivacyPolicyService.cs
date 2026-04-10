@@ -5,5 +5,6 @@ namespace PT.Application.Interfaces.Services;
 
 public interface IPrivacyPolicyService
 {
-    Task<PrivacyPolicy?> GetPrivacyPolicyAsync(UserType userType, CancellationToken ct = default);
+    Task<PrivacyPolicy?> GetLatestByUserTypeAsync(UserType userType, CancellationToken ct = default);
+    Task<PrivacyPolicy?> AddByUserTypeAsync(string text, UserType userType, CancellationToken ct = default);
 }

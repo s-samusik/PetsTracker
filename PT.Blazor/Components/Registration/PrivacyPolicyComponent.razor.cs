@@ -19,7 +19,7 @@ public partial class PrivacyPolicyComponent
     {
         loading = true;
 
-        var result = await privacyPolicyService.GetPrivacyPolicyAsync(UserType.Individual);
+        var result = await privacyPolicyService.GetLatestByUserTypeAsync(UserType.Individual);
 
         privacyPolicy = result?.Value ?? string.Empty;
 
