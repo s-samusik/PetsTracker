@@ -1,3 +1,154 @@
 ﻿@page "/"
+@layout PT.Blazor.Components.Layout.LandingLayout
 
-<h1>Hello, world!</h1>
+<MudContainer Style="padding:2rem 1rem;">
+    <MudPaper Elevation="2"
+              Class="pa-4"
+              Style="width:100%; max-width:1400px; margin:auto; background-color:var(--color-light); border-radius:12px;">
+
+        <!-- GRID: 1 column mobile, 2 columns desktop -->
+        <MudGrid GutterSize="24px">
+
+            <!-- HERO SECTION — всегда на всю ширину -->
+            <MudItem xs="12">
+                <MudStack AlignItems="AlignItems.Center" Spacing="2" Class="mt-2 mb-4">
+                    <MudImage Src="/img/hero.webp"
+                              Alt="Pets illustration"
+                              Style="width:100%; border-radius:12px;" />
+
+                    <MudText Typo="Typo.h4" Align="Align.Center" Style="color:var(--color-primary-dark);">
+                        My-Pets — QR‑код, который возвращает питомца домой
+                    </MudText>
+
+                    <MudText Typo="Typo.body1" Align="Align.Center" Style="color:var(--color-secondary);">
+                        Прикрепи QR‑код к ошейнику.
+                        Нашедший сканирует — и сразу видит контакты владельца.
+                        Регистрация стоит всего <b>4.99</b>.
+                    </MudText>
+                </MudStack>
+            </MudItem>
+
+
+            <!-- HOW IT WORKS -->
+            <MudItem xs="12" md="6">
+                <MudPaper Class="pa-4" Elevation="1" Style="border-radius:12px; height:100%;">
+                    <MudStack Spacing="2">
+                        <MudText Typo="Typo.h5" Style="color:var(--color-primary-dark);">
+                            Как это работает
+                        </MudText>
+
+                        <MudImage Src="/img/scan.png"
+                                  Alt="QR scanning"
+                                  Style="width:100%; border-radius:12px;" />
+
+                        <MudText Typo="Typo.body2" Style="color:var(--color-secondary);">
+                            Сканируешь QR‑код — и система показывает карточку питомца с контактами владельца.
+                        </MudText>
+                    </MudStack>
+                </MudPaper>
+            </MudItem>
+
+
+            <!-- Q&A SECTION -->
+            <MudItem xs="12" md="6">
+                <MudPaper Class="pa-4" Elevation="1" Style="border-radius:12px; height:100%;">
+                    <MudStack Spacing="2">
+                        <MudText Typo="Typo.h5" Style="color:var(--color-primary-dark);">
+                            Вопросы и ответы
+                        </MudText>
+
+                        <MudImage Src="/img/return.png"
+                                  Alt="Pet returned home"
+                                  Style="width:100%; border-radius:12px;" />
+
+                        <MudExpansionPanels Elevation="0">
+                            <MudExpansionPanel Text="Как работает QR‑код?">
+                                QR‑код содержит уникальный ID карточки.
+                                Нашедший сканирует его — и видит контакты владельца.
+                            </MudExpansionPanel>
+
+                            <MudExpansionPanel Text="Нужно ли приложение?">
+                                Нет. Всё работает прямо в браузере — у всех.
+                            </MudExpansionPanel>
+
+                            <MudExpansionPanel Text="Что если QR не читается?">
+                                Можно ввести код вручную — форма ниже.
+                            </MudExpansionPanel>
+                        </MudExpansionPanels>
+                    </MudStack>
+                </MudPaper>
+            </MudItem>
+
+
+            <!-- MANUAL REGISTRATION SECTION -->
+            <MudItem xs="12" md="6">
+                <MudPaper Class="pa-4" Elevation="1" Style="border-radius:12px; height:100%;">
+                    <MudStack Spacing="2">
+                        <MudText Typo="Typo.h5" Style="color:var(--color-primary-dark);">
+                            Ручная регистрация карточки
+                        </MudText>
+
+                        <MudImage Src="/img/tag.jpg"
+                                  Alt="QR pet tag"
+                                  Style="width:100%; border-radius:12px;" />
+
+                        <MudText Typo="Typo.body2" Style="color:var(--color-secondary);">
+                            Если у вас есть код карточки — введите его ниже и нажмите «Продолжить».
+                        </MudText>
+
+                        <MudGrid Justify="Justify.Center">
+                            <MudItem xs="12" sm="8">
+                                <MudTextField @bind-Value="manualCode"
+                                              Variant="Variant.Outlined"
+                                              Label="Код карточки"
+                                              MaxLength="9"
+                                              HelperText="формат: AA 11 AAA"
+                                              Style="--mud-palette-primary: var(--color-primary-dark);" />
+                            </MudItem>
+                        </MudGrid>
+
+                        <MudStack AlignItems="AlignItems.Center" Class="mt-2">
+                            <MudButton Variant="Variant.Filled"
+                                       Style="width:90%; background-color:var(--color-primary-light); color:var(--color-light); border-radius:25px;"
+                                       OnClick="GoToRegistration">
+                                Продолжить
+                            </MudButton>
+                        </MudStack>
+                    </MudStack>
+                </MudPaper>
+            </MudItem>
+
+
+            <!-- NEWS SECTION -->
+            <MudItem xs="12" md="6">
+                <MudPaper Class="pa-4" Elevation="1" Style="border-radius:12px; height:100%;">
+                    <MudStack Spacing="2">
+                        <MudText Typo="Typo.h5" Style="color:var(--color-primary-dark);">
+                            Новости и обновления
+                        </MudText>
+
+                        <MudImage Src="/img/smarttag.png"
+                                  Alt="Smart QR tag"
+                                  Style="width:100%; border-radius:12px;" />
+
+                        <MudList Dense="true" T="string">
+                            <MudListItem Text="Добавляем возможность прикреплять несколько питомцев к одному аккаунту." />
+                            <MudListItem Text="Скоро появится карта находок — чтобы быстрее возвращать питомцев." />
+                            <MudListItem Text="Готовим новые дизайны карточек и металлические жетоны." />
+                        </MudList>
+                    </MudStack>
+                </MudPaper>
+            </MudItem>
+
+        </MudGrid>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    private string manualCode = "";
+
+    private void GoToRegistration()
+    {
+        // TODO: навигация
+    }
+}
