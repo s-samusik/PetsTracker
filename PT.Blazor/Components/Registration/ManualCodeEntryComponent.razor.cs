@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
-using MudBlazor;
 
 namespace PT.Blazor.Components.Registration;
 
@@ -18,6 +16,6 @@ public partial class ManualCodeEntryComponent
     private void GoHome()
         => Nav.NavigateTo("/", forceLoad: true);
 
-    private string FormattedCode(string code)
+    private static string FormattedCode(string code)
         => code.Replace(" ", string.Empty).ToUpper();
 }
