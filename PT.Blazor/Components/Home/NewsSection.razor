@@ -1,0 +1,17 @@
+﻿@namespace PT.Blazor.Components.Home
+
+<MudPaper Class="pa-4" Elevation="2" Style="border-radius:12px; height:100%; background-color:var(--color-primary-light)">
+    <MudStack>
+        <MudIcon Icon="fa fa-newspaper" Size="Size.Medium" Style="color:var(--color-light); margin:auto;" />
+        
+        <MudText Typo="Typo.h6" Style="color:var(--color-light); margin:auto">
+            Новости и обновления:
+        </MudText>
+
+        <MudList Dense="true" T="string" Style="color:var(--color-light)">
+            <MudListItem Text="Запускаем проект!" SecondaryText="Теперь мы будем помогать"/>
+            <MudListItem Text="Новые возможности" SecondaryText="Теперь можно переключать языки" />
+            <MudListItem Text="Опять улучшили!" SecondaryText="Готовим новые дизайны карточек и многое другое" />
+        </MudList>
+    </MudStack>
+</MudPaper>

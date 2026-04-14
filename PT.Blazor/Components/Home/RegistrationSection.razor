@@ -1,0 +1,31 @@
+﻿<MudPaper Class="pa-4" Elevation="2" Style="border-radius:12px; height:100%;">
+    <MudStack>
+        <MudIcon Icon="fa fa-pencil-alt" Size="Size.Medium" Style="color:var(--color-primary-dark); margin:auto;" />
+
+        <MudText Typo="Typo.h6" Style="color:var(--color-primary-dark); margin:auto;">
+            Регистрация карточки:
+        </MudText>
+
+        <MudText Typo="Typo.body2" Style="color:var(--color-secondary); margin:auto">
+            Введите код и нажмите "Продолжить"
+        </MudText>
+
+        <MudGrid Justify="Justify.Center">
+            <MudItem xs="8" sm="6">
+                <MudTextField @bind-Value="Code"
+                              Variant="Variant.Text"
+                              MaxLength="7"
+                              HelperText="формат: AA11AAA"
+                              Style="--mud-palette-primary: var(--color-primary-dark);" />
+            </MudItem>
+        </MudGrid>
+
+        <MudStack AlignItems="AlignItems.Center" Class="mt-2">
+            <MudButton Variant="Variant.Filled"
+                       Style="width:90%; background-color:var(--color-primary-light); color:var(--color-light); border-radius:25px;"
+                       OnClick="GoToRegistration">
+                Продолжить
+            </MudButton>
+        </MudStack>
+    </MudStack>
+</MudPaper>

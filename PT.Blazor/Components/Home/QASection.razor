@@ -1,0 +1,51 @@
+﻿@namespace PT.Blazor.Components.Home
+
+<MudPaper Class="pa-4" Elevation="2" Style="border-radius:12px; height:100%; background-color:var(--color-primary-light)">
+    <MudStack>
+        <MudIcon Icon="fa fa-question-circle" Size="Size.Medium" Style="color:var(--color-light); margin:auto;" />
+
+        <MudText Typo="Typo.h6" Style="color:var(--color-light); margin:auto">
+            Вопросы и ответы:
+        </MudText>
+
+        <MudExpansionPanels Elevation="0">
+            <MudExpansionPanel Text="Можно изменить данные после регистрации?">
+                <span style="color:var(--color-secondary)">
+                    На данный момент, к сожалению, нет.<br />
+                    Поэтому внимательно всё проверьте. В будущем мы планируем добавить такую возможность.
+                </span>
+            </MudExpansionPanel>
+
+            <MudExpansionPanel Text="Нужно ли приложение?">
+                <span style="color:var(--color-secondary)">
+                    Нет. Всё работает прямо в браузере - у всех.
+                </span>
+            </MudExpansionPanel>
+
+             <MudExpansionPanel Text="Как работает QR‑код?">
+                <span style="color:var(--color-secondary)">
+                    QR‑код содержит уникальный код карточки.<br />
+                    Нашедший сканирует QR‑код и видит карточку Вашего питомца со всеми данными, которые были указаны при регистрации.
+                </span>
+            </MudExpansionPanel>
+
+            <MudExpansionPanel Text="Нужно ли продлевать оплату за карточку?">
+                <span style="color:var(--color-secondary)">
+                    Нет. Ваша карточка будет работать всегда. Никаких дополнительных оплат не требуется.
+                </span>
+            </MudExpansionPanel>
+
+            <MudExpansionPanel Text="Я могу зарегистрироать несколько карточек на один номер?">
+                <span style="color:var(--color-secondary)">
+                    Да. Нет никаких ограничений на количество регистраций.
+                </span>
+            </MudExpansionPanel>
+
+            <MudExpansionPanel Text="Я могу зарегистрироать несколько карточек одному питомцу?">
+                <span style="color:var(--color-secondary)">
+                    Да. У Вашего питомца может быть несколько зарегистрированных карточек.
+                </span>
+            </MudExpansionPanel>
+        </MudExpansionPanels>
+    </MudStack>
+</MudPaper>
