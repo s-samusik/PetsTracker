@@ -61,10 +61,11 @@ jobs:
       - name: Set image tag
         id: set-tag
         run: |
-          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
-            echo "tag=prod-${{ github.sha::8 }}" >> $GITHUB_OUTPUT
+          SHORT_SHA=${GITHUB_SHA::8}
+          if [ "${GITHUB_REF}" = "refs/heads/main" ]; then
+            echo "tag=prod-${SHORT_SHA}" >> $GITHUB_OUTPUT
           else
-            echo "tag=dev-${{ github.sha::8 }}" >> $GITHUB_OUTPUT
+            echo "tag=dev-${SHORT_SHA}" >> $GITHUB_OUTPUT
           fi
 
       - name: Login to GHCR
