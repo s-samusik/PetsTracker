@@ -1,0 +1,32 @@
+name: Deploy PetsTracker
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: |
+          docker build -t petstracker:latest .
+
+      - name: Stop old container
+        run: |
+          docker stop petstracker || true
+          docker rm petstracker || true
+
+      - name: Run new container
+        run: |
+          docker run -d \
+            --name petstracker \
+            -p 80:8080 \
+            --env-file /home/deployer/apps/my-***/envs/my-***.dev.env \
+            petstracker:latest
