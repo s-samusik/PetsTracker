@@ -110,7 +110,7 @@ jobs:
           echo "FILE_NAME=$ENVFILE" >> $GITHUB_OUTPUT
 
       - name: Copy env file to server
-        uses: appleboy/scp-action@v0.1.9
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_SSH_USER }}
@@ -120,7 +120,7 @@ jobs:
           target: "/home/${{ secrets.DEPLOY_SSH_USER }}/apps/my-pets/envs/"
 
       - name: Deploy on server via SSH
-        uses: appleboy/ssh-action@v0.1.9
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_SSH_USER }}
