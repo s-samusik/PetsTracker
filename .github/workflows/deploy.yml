@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - develop
-      - main
 
 jobs:
   deploy:
@@ -16,17 +15,17 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t petstracker:latest .
+          docker build -t my-pets:latest .
 
       - name: Stop old container
         run: |
-          docker stop petstracker || true
-          docker rm petstracker || true
+          docker stop my-pets || true
+          docker rm my-pets || true
 
       - name: Run new container
         run: |
           docker run -d \
-            --name petstracker \
+            --name my-pets \
             -p 80:8080 \
-            --env-file /home/deployer/apps/my-***/envs/my-***.dev.env \
-            petstracker:latest
+            --env-file /home/deployer/apps/my-pets/envs/dev.env \
+            my-pets:latest
