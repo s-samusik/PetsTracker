@@ -115,7 +115,7 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_SSH_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
-          port: 22
+          port: ${{ secrets.DEPLOY_SSH_PORT }}
           source: "${{ steps.create_env.outputs.FILE_NAME }}"
           target: "/home/${{ secrets.DEPLOY_SSH_USER }}/apps/my-pets/envs/"
 
@@ -125,7 +125,7 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_SSH_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
-          port: 22
+          port: ${{ secrets.DEPLOY_SSH_PORT }}
           script: |
             set -e
             cd /home/${{ secrets.DEPLOY_SSH_USER }}/apps/my-pets
