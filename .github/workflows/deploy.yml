@@ -1,0 +1,31 @@
+name: Deploy PetsTracker Prod
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: |
+          docker build -t my-pets:latest .
+
+      - name: Stop old container
+        run: |
+          docker stop my-pets-prod || true
+          docker rm my-pets-prod || true
+
+      - name: Run new container
+        run: |
+          docker run -d \
+            --name my-pets-prod \
+            -p 5000:80 \
+            --env-file /home/deployer/apps/my-pets/envs/prod.env \
+            my-pets:latest
