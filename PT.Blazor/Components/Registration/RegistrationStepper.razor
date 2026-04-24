@@ -71,7 +71,7 @@
             else
             {
                 <MudButton Variant="Variant.Text"
-                           Style="color:var(--color-secondary); flex-shrink: 0"
+                           Style="color:var(--color-secondary); flex-shrink:0; border-radius:25px;"
                            OnClick="@(() => stepper.PreviousStepAsync())"
                            StartIcon="@Icons.Material.Filled.ArrowBackIos"
                            Disabled="@(index < 1)">
