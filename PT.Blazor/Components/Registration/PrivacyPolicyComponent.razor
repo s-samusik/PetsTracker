@@ -28,12 +28,10 @@
     {
         <MudGrid Justify="Justify.Center">
             <MudItem xs="12" sm="9">
-                <MudTextField Variant="Variant.Text"
-                              Style="max-height:65%; --mud-palette-primary: var(--color-primary-dark);"
-                              T="string"
-                              Text="@privacyPolicy"
-                              Lines="23"
-                              ReadOnly="true" />
+                <MudPaper Class="pa-2"
+                          Style="width:100%; max-height:67dvh; overflow-y:auto;">
+                    @((MarkupString)privacyPolicy)
+                </MudPaper>
             </MudItem>
         </MudGrid>
     }
@@ -46,7 +44,7 @@
         Принимаю
     </MudButton>
     <MudButton Variant="Variant.Text"
-               Style="width:90%; color:var(--color-secondary); flex-shrink:0"
+               Style="width:90%; color:var(--color-secondary); flex-shrink:0; border-radius:25px;"
                OnClick="GoHome">
         На главную
     </MudButton>
