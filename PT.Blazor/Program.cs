@@ -23,6 +23,11 @@ builder.Services.AddAwsStorage(builder.Configuration);
 
 builder.Services.AddScoped<PetCardStateMachine>();
 
+builder.Services.AddSignalR(options =>
+{
+    options.KeepAliveInterval = TimeSpan.FromSeconds(15);
+});
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
