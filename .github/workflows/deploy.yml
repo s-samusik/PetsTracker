@@ -13,9 +13,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Build Docker image
+      - name: Build Docker image (safe mode)
         run: |
-          docker build -t my-pets:latest .
+          docker build \
+            --memory=1g \
+            --memory-swap=2g \
+            -t my-pets:latest .
 
       - name: Stop old container
         run: |
