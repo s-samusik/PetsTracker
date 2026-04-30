@@ -1,4 +1,5 @@
-﻿<MudPaper Class="pa-4" Elevation="2" Style="border-radius:12px; height:100%;">
+﻿@using MudBlazor.Utilities
+<MudPaper Class="pa-4" Elevation="2" Style="border-radius:12px; height:100%;">
     <MudStack>
         <MudIcon Icon="fa fa-pencil-alt" Size="Size.Medium" Style="color:var(--color-primary-dark); margin:auto;" />
 
@@ -14,6 +15,7 @@
             <MudItem xs="8" sm="6">
                 <MudTextField @bind-Value="Code"
                               Variant="Variant.Text"
+                              Class="@CodeInputClass"
                               MaxLength="7"
                               HelperText="формат: AA11AAA"
                               Style="--mud-palette-primary: var(--color-primary-dark);" />
@@ -29,3 +31,7 @@
         </MudStack>
     </MudStack>
 </MudPaper>
+
+@code {
+    private string CodeInputClass => new CssBuilder("code-input").Build();
+}
