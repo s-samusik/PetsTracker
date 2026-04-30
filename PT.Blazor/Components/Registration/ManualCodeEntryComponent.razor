@@ -1,4 +1,5 @@
-﻿<MudStack AlignItems="AlignItems.Center"
+﻿@using MudBlazor.Utilities
+<MudStack AlignItems="AlignItems.Center"
           Style="height:100%; overflow-y:auto; overflow-x: hidden">
     <MudIcon Class="mt-6"
              Style="font-size: 6rem;"
@@ -21,6 +22,7 @@
                           Variant="Variant.Text"
                           Typo="Typo.h6"
                           MaxLength="7"
+                          Class="@CodeInputClass"
                           Style="--mud-palette-primary: var(--color-primary-dark);"
                           HelperText="формат: AA11AAA"/>
         </MudItem>
@@ -39,3 +41,7 @@
         На главную
     </MudButton>
 </MudStack>
+
+@code {
+    private string CodeInputClass => new CssBuilder("code-input").Build();
+}
